@@ -1,3 +1,5 @@
+.PHONY: all help install vimrc vundle
+
 all: help
 
 help:
