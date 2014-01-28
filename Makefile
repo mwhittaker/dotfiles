@@ -5,10 +5,14 @@ all: help
 help:
 	@echo "make [install]"
 
-install: vimrc vundle
+install: gitconfig vimrc vundle
 
 vimrc: .vimrc
-	ln -s "$$(pwd)/.vimrc" ~/.vimrc
+	ln -s "$$(pwd)/$<" ~/$<
+
+gitconfig: .gitconfig
+	ln -s "$$(pwd)/$<" ~/$<
+	apt-get install gitg
 
 vundle:
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
