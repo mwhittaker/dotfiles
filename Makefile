@@ -1,5 +1,9 @@
 .PHONY: all help install vimrc vundle
 
+LINK       = ln -s -i
+PM         = apt-get
+PM_INSTALL = $(PM) install
+
 all: help
 
 help:
@@ -8,12 +12,11 @@ help:
 install: gitconfig vimrc vundle
 
 vimrc: .vimrc
-	ln -s "$$(pwd)/$<" ~/$<
+	$(LINK) "$$(pwd)/$<" ~/$<
 
 gitconfig: .gitconfig
-	ln -s "$$(pwd)/$<" ~/$<
-	apt-get install gitg
+	$(LINK) "$$(pwd)/$<" ~/$<
+	$(PM_INSTALL) gitg
 
 vundle:
-	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-	vim +BundleInstall +qall
+	-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle && vim +BundleInstall +qall
