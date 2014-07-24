@@ -30,6 +30,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,10 +65,10 @@ set number
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 if has('gui_running')
-    if has('unix')
-        set guifont=DejaVu\ Sans\ Mono\ Book\ 10
-    else
+    if has('gui_macvim')
         set guifont=Menlo:h12
+    else
+        set guifont=DejaVu\ Sans\ Mono\ Book\ 10
     endif
 endif
 
@@ -84,6 +85,8 @@ if has('gui_running')
     set background=dark
     colorscheme solarized
     call togglebg#map("")
+else
+    colorscheme jellybeans
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
