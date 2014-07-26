@@ -86,7 +86,11 @@ if has('gui_running')
     colorscheme solarized
     call togglebg#map("")
 else
-    colorscheme jellybeans
+    try 
+        colorscheme jellybeans
+    catch /^Vim\%((\a\+)\)\=:E185/
+        " oh well, we'll use the default 
+    endtry
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
