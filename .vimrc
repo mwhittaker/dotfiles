@@ -17,7 +17,6 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Blackrush/vim-gocode'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Raimondi/delimitMate'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
@@ -31,6 +30,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
 Plugin 'flazz/vim-colorschemes'
+
+if version >= 703
+    Plugin 'Lokaltog/vim-easymotion'
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,9 +137,10 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Gif config
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+if version >= 703
+    map  / <Plug>(easymotion-sn)
+    omap / <Plug>(easymotion-tn)
+endif
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
