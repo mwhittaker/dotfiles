@@ -68,7 +68,7 @@ if has('gui_running')
     if has('gui_macvim')
         set guifont=Menlo:h12
     else
-        set guifont=DejaVu\ Sans\ Mono\ Book\ 10
+        set guifont=DejaVu\ Sans\ Mono\ Book\ 12
     endif
 endif
 
@@ -85,12 +85,6 @@ if has('gui_running')
     set background=dark
     colorscheme solarized
     call togglebg#map("")
-else
-    try 
-        colorscheme jellybeans
-    catch /^Vim\%((\a\+)\)\=:E185/
-        " oh well, we'll use the default 
-    endtry
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
