@@ -74,10 +74,8 @@ if has('gui_running')
         set guifont=DejaVu\ Sans\ Mono\ Book\ 12
     endif
 else 
-    if $COLORTERM == 'gnome-terminal'
-        set t_Co=256
-        colorscheme jellybeans
-    endif
+    set t_Co=256
+    colorscheme jellybeans
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
