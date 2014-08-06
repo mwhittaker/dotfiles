@@ -76,7 +76,11 @@ if has('gui_running')
     endif
 else 
     set t_Co=256
-    colorscheme jellybeans
+    try
+        colorscheme jellybeans
+    catch /^Vim\%((\a\+)\)\=:E185/
+        " deal with it
+    endtry
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
