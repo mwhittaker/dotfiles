@@ -1,7 +1,50 @@
+# enable vi mode
 set-window-option -g mode-keys vi
-setw -g mode-mouse on
-set-option -g mouse-select-pane on
+
+# support 256 colors
 set -g default-terminal "screen-256color"
+
+# enable mouse support
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set -g mouse-select-window on
+
+# only allow arrow keys to be pressed once
+bind-key Up    select-pane -U
+bind-key Down  select-pane -D
+bind-key Left  select-pane -L
+bind-key Right select-pane -R
+
+# split windows and panes from current path
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
+
+# default statusbar colors
+set-option -g status-bg   colour235 #base02
+set-option -g status-fg   colour15  #white
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+
+# active window title colors
+set-window-option -g window-status-current-fg red
+set-window-option -g window-status-current-bg default
+
+# pane border
+set-option -g pane-border-fg        colour52
+set-option -g pane-active-border-fg red
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg white
+
+# pane number display
+set-option -g display-panes-active-colour red
+set-option -g display-panes-colour        white
+
+# clock
+set-window-option -g clock-mode-colour white
