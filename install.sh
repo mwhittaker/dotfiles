@@ -32,12 +32,18 @@ install_vimrc() {
     link .vimrc ~/.vimrc
 }
 
+install_xmonad_hs() {
+    mkdir -p ~/.xmonad
+    link xmonad.hs ~/.xmonad/xmonad.hs
+}
+
 main() {
     install_bash_aliases
     install_bashrc
     install_gitconfig
     install_tmux_conf
     install_vimrc
+    install_xmonad_hs
 }
 
 main
