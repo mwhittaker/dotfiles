@@ -14,3 +14,5 @@
 
 [branch]
 	autosetuprebase = always
+[core]
+	editor = vim
