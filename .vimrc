@@ -112,6 +112,7 @@ autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType php setlocal shiftwidth=2 tabstop=2
 autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
 autocmd FileType go setlocal noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
