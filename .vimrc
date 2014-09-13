@@ -74,7 +74,7 @@ if has('gui_running')
     else
         set guifont=DejaVu\ Sans\ Mono\ Book\ 12
     endif
-else 
+else
     set t_Co=256
     try
         colorscheme jellybeans
@@ -117,12 +117,12 @@ autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 autocmd FileType go setlocal noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bash tab completion 
+" Bash tab completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmode=longest,list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Splits 
+" Splits
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set splitbelow
 set splitright
