@@ -167,7 +167,7 @@ endif
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy'] }
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
 autocmd BufNewFile,BufRead *.ipy set filetype=ipy
 autocmd FileType ipy setlocal syntax=python
 au BufRead,BufNewFile *.md set filetype=markdown
