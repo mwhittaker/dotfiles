@@ -28,6 +28,7 @@ Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
 
