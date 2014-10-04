@@ -123,6 +123,11 @@ autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
 autocmd FileType go setlocal noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove syntax highlighting for nested latex code
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au Syntax tex syn region texZone start="\\begin{pycode}" end="\\end{pycode}"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bash tab completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildmode=longest,list
