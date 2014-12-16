@@ -5,7 +5,7 @@ link() {
 }
 
 install_bash_aliases() {
-    link .bash_aliases ~/.bash_aliases 
+    link .bash_aliases ~/.bash_aliases
 }
 
 install_bashrc() {
@@ -18,7 +18,7 @@ install_gitconfig() {
 
 install_tmux_conf() {
     local tmux_version=$(tmux -V | awk '{print $2}')
-    if test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then 
+    if test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then
         link .tmux.conf-1.8 ~/.tmux.conf
     else
         link .tmux.conf-1.9 ~/.tmux.conf
@@ -30,6 +30,7 @@ install_vimrc() {
         git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
     link .vimrc ~/.vimrc
+    vim +PluginInstall +qa
 }
 
 install_xmonad_hs() {
