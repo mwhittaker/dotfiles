@@ -117,5 +117,10 @@ if [ -f ~/.bash_path ]; then
     . ~/.bash_path
 fi
 
+# Functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 bind 'C-p':history-search-backward
 bind 'C-n':history-search-forward
