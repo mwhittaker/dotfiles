@@ -182,5 +182,5 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
 let g:syntastic_python_pylint_args = "--errors-only"
 autocmd BufNewFile,BufRead *.ipy set filetype=ipy
+autocmd BufRead,BufNewFile *.md  set filetype=markdown
 autocmd FileType ipy setlocal syntax=python
-au BufRead,BufNewFile *.md set filetype=markdown
