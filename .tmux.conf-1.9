@@ -21,6 +21,10 @@ bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
+# status bar right
+set -g status-right-length 60
+set -g status-right '◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") | ♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") | ♥#(acpi | cut -d "," -f 2) | %I:%M %p'
+
 # default statusbar colors
 set-option -g status-bg   colour235 #base02
 set-option -g status-fg   colour15  #white
