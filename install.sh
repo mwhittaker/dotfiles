@@ -23,6 +23,10 @@ install_tmux_conf() {
     else
         link .tmux.conf-1.9 ~/.tmux.conf
     fi
+
+    command -v nm-tool >/dev/null 2>&1 || echo "PLEASE INSTALL NM-TOOL"
+    command -v amixer  >/dev/null 2>&1 || echo "PLEASE INSTALL AMIXER"
+    command -v acpi    >/dev/null 2>&1 || echo "PLEASE INSTALL ACPI"
 }
 
 install_vimrc() {
