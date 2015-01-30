@@ -141,7 +141,7 @@ set splitright
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supertab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabContextDefaultCompletionType = "<c-n>" " tab from top to bottom
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,3 +184,8 @@ let g:syntastic_python_pylint_args = "--errors-only"
 autocmd BufNewFile,BufRead *.ipy set filetype=ipy
 autocmd BufRead,BufNewFile *.md  set filetype=markdown
 autocmd FileType ipy setlocal syntax=python
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SQL
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:omni_sql_no_default_maps = 1
