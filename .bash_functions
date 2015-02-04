@@ -23,3 +23,19 @@ function ..() {
         return 1
     fi
 }
+
+# preview options for ..
+function ...() {
+    dir="$(pwd)"
+    i=0
+    while ! test "$dir" = "/"; do
+        if test $((i % 2)) -eq 0; then
+            printf "\x1b[37m%2d. %s [%d]\x1b[0m\n" "$i" "$dir" "$i"
+        else
+            printf "%2d. %s [%d]\n" "$i" "$dir" "$i"
+        fi
+        dir=$(cd "$dir/.."; pwd)
+        i=$((i + 1))
+    done
+    printf "%2d. %s [%d]\n" "$i" "$dir" "$i"
+}
