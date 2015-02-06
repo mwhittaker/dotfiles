@@ -20,6 +20,7 @@ Plugin 'Blackrush/vim-gocode'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 "Plugin 'davidhalter/jedi-vim'
+Plugin 'def-lkb/vimbufsync'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
@@ -28,6 +29,7 @@ Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'the-lambda-church/coquille'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
@@ -176,6 +178,11 @@ if version >= 703
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leader
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -189,3 +196,14 @@ autocmd FileType ipy setlocal syntax=python
 " SQL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:omni_sql_no_default_maps = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Coq
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:coquille_auto_move = 'true'
+
+map <silent> <leader>cl :CoqLaunch<cr>
+map <silent> <leader>cc :CoqToCursor<cr>
+map <silent> <leader>cn :CoqNext<cr>
+map <silent> <leader>cu :CoqUndo<cr>
+map <silent> <leader>ck :CoqKill<cr>
