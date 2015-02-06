@@ -8,7 +8,7 @@ install_bash_aliases() {
     link .bash_aliases ~/.bash_aliases
 }
 
-install_bash_aliases() {
+install_bash_functions() {
     link .bash_functions ~/.bash_functions
 }
 
