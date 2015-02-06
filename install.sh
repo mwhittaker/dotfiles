@@ -39,6 +39,13 @@ install_vimrc() {
     fi
     link .vimrc ~/.vimrc
     vim +PluginInstall +qa
+
+    echo 'In ~/.vim/bundle/coquille/autoload/coquille.vim, change'
+    echo '  hi CheckedByCoq ctermbg=17 guibg=LightGreen'
+    echo '  hi SentToCoq ctermbg=60 guibg=LimeGreen'
+    echo 'to'
+    echo '  hi link CheckedByCoq ColorColumn'
+    echo '  hi link SentToCoq Cursor'
 }
 
 install_xmonad_hs() {
