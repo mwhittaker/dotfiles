@@ -181,11 +181,13 @@ endif
 " leader
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = "\<Space>"
+set notimeout
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_ocaml_checkers = ["merlin"]
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
 let g:syntastic_python_pylint_args = "--errors-only"
 autocmd BufNewFile,BufRead *.ipy set filetype=ipy
@@ -207,3 +209,9 @@ map <silent> <leader>cc :CoqToCursor<cr>
 map <silent> <leader>cn :CoqNext<cr>
 map <silent> <leader>cu :CoqUndo<cr>
 map <silent> <leader>ck :CoqKill<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OCaml
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"

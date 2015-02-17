@@ -45,7 +45,7 @@ install_vimrc() {
     echo '  hi SentToCoq ctermbg=60 guibg=LimeGreen'
     echo 'to'
     echo '  hi link CheckedByCoq ColorColumn'
-    echo '  hi link SentToCoq Cursor'
+    echo '  hi link SentToCoq Visual'
 }
 
 install_xmonad_hs() {
