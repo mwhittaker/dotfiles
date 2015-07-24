@@ -122,5 +122,6 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 fi
 
+# Enable <ctrl-p> and <ctrl-n> shortcuts
 bind 'C-p':history-search-backward
 bind 'C-n':history-search-forward
