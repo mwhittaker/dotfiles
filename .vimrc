@@ -29,6 +29,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'the-lambda-church/coquille'
 Plugin 'tpope/vim-surround'
@@ -194,6 +195,11 @@ let g:syntastic_python_pylint_args = "--errors-only"
 autocmd BufNewFile,BufRead *.ipy set filetype=ipy
 autocmd BufRead,BufNewFile *.md  set filetype=markdown
 autocmd FileType ipy setlocal syntax=python
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Gundo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>u :GundoToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SQL
