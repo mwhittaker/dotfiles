@@ -27,6 +27,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
@@ -200,6 +201,25 @@ autocmd FileType ipy setlocal syntax=python
 " Gundo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>u :GundoToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDCommenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Reset some of NERDCommenter's default comment delimiters. See
+" https://github.com/scrooloose/nerdcommenter/issues/33 for more information.
+let g:NERDCustomDelimiters = {
+    \ 'c':          { 'left': '// ', 'right': '',      'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'cpp':        { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'haskell':    { 'left': '-- ',                   'leftAlt': '{- ', 'rightAlt': ' -}' },
+    \ 'java':       { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'javascript': { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'matlab':     { 'left': '% '                                                         },
+    \ 'ocaml':      { 'left': '(* ', 'right': ' *)'                                        },
+    \ 'python':     { 'left': '# '                                                         },
+    \ 'sh':         { 'left': '# '                                                         },
+    \ 'tmux':       { 'left': '# '                                                         },
+\ }
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SQL
