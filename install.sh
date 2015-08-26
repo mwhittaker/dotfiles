@@ -53,6 +53,10 @@ install_xmonad_hs() {
     link xmonad.hs ~/.xmonad/xmonad.hs
 }
 
+install_latexmkrc() {
+    link .latexmkrc ~/.latexmkrc
+}
+
 main() {
     install_bash_aliases
     install_bash_functions
@@ -61,6 +65,7 @@ main() {
     install_tmux_conf
     install_vimrc
     install_xmonad_hs
+    install_latexmkrc
 }
 
 main
