@@ -43,3 +43,10 @@ function ...() {
         i=$((i + 1))
     done
 }
+
+# latex
+tex() {
+    tmux resize-pane -D 100
+    tmux resize-pane -U 6
+    latexmk -pvc -pdf -quiet "$1" 2>&1 | grep --color -E '^|Failure'
+}
