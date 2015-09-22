@@ -26,6 +26,7 @@ Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
+Plugin 'mkitt/tabline.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -55,6 +56,12 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leader
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"
+set notimeout
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set indents
@@ -97,6 +104,25 @@ endif
 " Tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabpagemax=20
+nnoremap <tab> gt
+nnoremap <s-tab> gT
+nnoremap <leader>1 1gt<cr>
+nnoremap <leader>2 2gt<cr>
+nnoremap <leader>3 3gt<cr>
+nnoremap <leader>4 4gt<cr>
+nnoremap <leader>5 5gt<cr>
+nnoremap <leader>6 6gt<cr>
+nnoremap <leader>7 7gt<cr>
+nnoremap <leader>8 8gt<cr>
+nnoremap <leader>9 9gt<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Windows
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Solarized for gvim
@@ -181,12 +207,6 @@ if version >= 703
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" leader
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = "\<Space>"
-set notimeout
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
@@ -217,9 +237,14 @@ let g:NERDCustomDelimiters = {
     \ 'ocaml':      { 'left': '(* ', 'right': ' *)'                                        },
     \ 'python':     { 'left': '# '                                                         },
     \ 'sh':         { 'left': '# '                                                         },
+    \ 'tex':        { 'left': '% '                                                         },
     \ 'tmux':       { 'left': '# '                                                         },
 \ }
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Multiple Cursors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:multi_cursor_quit_key='<C-c>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SQL
