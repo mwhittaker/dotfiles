@@ -20,7 +20,6 @@ Plugin 'Blackrush/vim-gocode'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-"Plugin 'davidhalter/jedi-vim'
 Plugin 'def-lkb/vimbufsync'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
@@ -34,7 +33,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'the-lambda-church/coquille'
-Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
 
@@ -58,32 +56,56 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" leader
+" Basic Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leader
 let mapleader = "\<Space>"
 set notimeout
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set indents
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" prevent pinky fatigue
+noremap <C-c> <Esc>
+
+" line numbering
+set number
+
+" tabs and indents
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" C-c -> Esc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <C-c> <Esc>
+" easier tab navigation
+set tabpagemax=20
+nnoremap <tab> gt
+nnoremap <s-tab> gT
+nnoremap <leader>1 1gt<cr>
+nnoremap <leader>2 2gt<cr>
+nnoremap <leader>3 3gt<cr>
+nnoremap <leader>4 4gt<cr>
+nnoremap <leader>5 5gt<cr>
+nnoremap <leader>6 6gt<cr>
+nnoremap <leader>7 7gt<cr>
+nnoremap <leader>8 8gt<cr>
+nnoremap <leader>9 9gt<cr>
+
+" easier window navigation
+set splitbelow
+set splitright
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+" enable vim modelines
+set modeline
+
+" bash-like tab completion
+set wildmode=longest,list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set line numbers
+" Advanced Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set number
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Font
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set font
 syntax on
 if has('gui_running')
     if has('gui_macvim')
@@ -100,33 +122,7 @@ else
     endtry
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set tabpagemax=20
-nnoremap <tab> gt
-nnoremap <s-tab> gT
-nnoremap <leader>1 1gt<cr>
-nnoremap <leader>2 2gt<cr>
-nnoremap <leader>3 3gt<cr>
-nnoremap <leader>4 4gt<cr>
-nnoremap <leader>5 5gt<cr>
-nnoremap <leader>6 6gt<cr>
-nnoremap <leader>7 7gt<cr>
-nnoremap <leader>8 8gt<cr>
-nnoremap <leader>9 9gt<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Windows
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use Solarized for gvim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" use solarized for gvim
 if has('gui_running')
     syntax enable
     set background=dark
@@ -134,55 +130,12 @@ if has('gui_running')
     call togglebg#map("")
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 80 character highlight
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" highlight 80-character column
 if version >= 703
     let &colorcolumn=join(range(81,81),",")
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set modeline, the inline vim edits.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set modeline
-
-autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType php setlocal shiftwidth=2 tabstop=2
-autocmd FileType tex setlocal shiftwidth=2 tabstop=2
-autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
-autocmd FileType go setlocal noexpandtab
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove syntax highlighting for nested latex code
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au Syntax tex syn region texZone start="\\begin{pycode}" end="\\end{pycode}"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bash tab completion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wildmode=longest,list
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Splits
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set splitbelow
-set splitright
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Supertab
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabContextDefaultCompletionType = "<c-n>" " tab from top to bottom
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set laststatus=2
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " remove trailing whitespace on save
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
@@ -191,6 +144,48 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Programming Languages
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OCaml
+autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+" SQL
+let g:omni_sql_no_default_maps = 1
+
+" Coq
+let g:coquille_auto_move = 'true'
+map <silent> <leader>cl :CoqLaunch<cr>
+map <silent> <leader>cc :CoqToCursor<cr>
+map <silent> <leader>cn :CoqNext<cr>
+map <silent> <leader>cu :CoqUndo<cr>
+map <silent> <leader>ck :CoqKill<cr>
+
+" html
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
+" php
+autocmd FileType php setlocal shiftwidth=2 tabstop=2
+
+" tex
+autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+autocmd FileType tex setlocal spell
+autocmd Syntax tex syn region texZone start="\\begin{pycode}" end="\\end{pycode}"
+
+" verilog
+autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
+
+" go
+autocmd FileType go setlocal noexpandtab
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easymotion
@@ -245,25 +240,3 @@ let g:NERDCustomDelimiters = {
 " Multiple Cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:multi_cursor_quit_key='<C-c>'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SQL
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:omni_sql_no_default_maps = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coq
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:coquille_auto_move = 'true'
-
-map <silent> <leader>cl :CoqLaunch<cr>
-map <silent> <leader>cc :CoqToCursor<cr>
-map <silent> <leader>cn :CoqNext<cr>
-map <silent> <leader>cu :CoqUndo<cr>
-map <silent> <leader>ck :CoqKill<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OCaml
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
