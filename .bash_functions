@@ -1,6 +1,6 @@
 # http://askubuntu.com/a/110933
 # Go up directory tree X number of directories
-function ..() {
+..() {
     COUNTER="$@";
 
     # default $COUNTER to 1 if it isn't already set
@@ -25,7 +25,7 @@ function ..() {
 }
 
 # preview options for ..
-function ...() {
+...() {
     dir="$(pwd)"
     i=0
     while true; do
