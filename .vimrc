@@ -74,6 +74,12 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" easier command line navigation
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
 " easier tab navigation
 set tabpagemax=20
 nnoremap <tab> gt
@@ -101,6 +107,9 @@ set modeline
 
 " bash-like tab completion
 set wildmode=longest,list
+
+" Improved history
+set history=1000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Advanced Vim
