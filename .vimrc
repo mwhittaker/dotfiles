@@ -191,6 +191,12 @@ autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
 " go
 autocmd FileType go setlocal noexpandtab
 
+" text
+autocmd FileType text setlocal spell
+
+" markdown
+autocmd FileType markdown setlocal spell
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline
