@@ -155,6 +155,9 @@ endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+" URL Shortener
+vnoremap <leader>su :!xargs shurl<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
