@@ -2,11 +2,12 @@
 alias v="vim"
 
 # git
-alias gs="git status"
 alias ga="git add"
+alias gb="git branch"
 alias gc="git commit"
 alias gd="git diff"
 alias gl="git lg"
+alias gs="git status"
 
 # tmux
 alias tmux="tmux -2"
