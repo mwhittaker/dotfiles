@@ -46,7 +46,9 @@
 
 # latex
 tex() {
-    tmux resize-pane -D 100
-    tmux resize-pane -U 6
+    if [ "$TMUX" ]; then
+        tmux resize-pane -D 100
+        tmux resize-pane -U 6
+    fi
     latexmk -pvc -pdf -quiet "$1" 2>&1 | grep --color -E '^|Failure'
 }
