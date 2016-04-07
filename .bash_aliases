@@ -11,6 +11,8 @@ alias gs="git status"
 
 # tmux
 alias tmux="tmux -2"
+alias t="tmux"
+alias tnew="tmux new -s"
 
 # misc
 alias ack="ack-grep"
