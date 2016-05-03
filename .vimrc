@@ -34,6 +34,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'the-lambda-church/coquille'
+Plugin 'tpope/vim-rsi'
 Plugin 'vim-scripts/Tabmerge'
 Plugin 'wting/rust.vim'
 
