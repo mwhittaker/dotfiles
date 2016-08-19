@@ -1,5 +1,6 @@
 # vim
 alias v="vim"
+alias v-="vim -"
 
 # git
 alias ga="git add"
