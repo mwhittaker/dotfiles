@@ -17,3 +17,5 @@
 	autosetuprebase = always
 [core]
 	editor = vim
+[diff]
+    tool = vimdiff
