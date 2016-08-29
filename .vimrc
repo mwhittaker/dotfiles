@@ -118,6 +118,11 @@ set history=1000
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set font
 syntax on
+try
+    colorscheme jellybeans
+catch /^Vim\%((\a\+)\)\=:E185/
+    " deal with it
+endtry
 if has('gui_running')
     if has('gui_macvim')
         set guifont=Menlo:h12
@@ -126,19 +131,6 @@ if has('gui_running')
     endif
 else
     set t_Co=256
-    try
-        colorscheme jellybeans
-    catch /^Vim\%((\a\+)\)\=:E185/
-        " deal with it
-    endtry
-endif
-
-" use solarized for gvim
-if has('gui_running')
-    syntax enable
-    set background=dark
-    colorscheme solarized
-    call togglebg#map("")
 endif
 
 " highlight 80-character column
