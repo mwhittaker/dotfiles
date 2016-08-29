@@ -16,11 +16,11 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'Blackrush/vim-gocode'
+" Plugin 'Blackrush/vim-gocode'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'def-lkb/vimbufsync'
+" Plugin 'def-lkb/vimbufsync'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
@@ -33,10 +33,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'the-lambda-church/coquille'
+" Plugin 'the-lambda-church/coquille'
 Plugin 'tpope/vim-rsi'
-Plugin 'vim-scripts/Tabmerge'
-Plugin 'wting/rust.vim'
+" Plugin 'vim-scripts/Tabmerge'
+" Plugin 'wting/rust.vim'
 
 if version >= 703
     Plugin 'Lokaltog/vim-easymotion'
