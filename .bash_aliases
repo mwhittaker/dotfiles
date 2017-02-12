@@ -9,6 +9,7 @@ alias gc="git commit"
 alias gd="git diff"
 alias gl="git lg"
 alias gs="git status"
+alias gca="git commit -a"
 
 # tmux
 alias tmux="tmux -2"
