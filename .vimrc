@@ -16,11 +16,8 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'Blackrush/vim-gocode'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-" Plugin 'def-lkb/vimbufsync'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
@@ -28,13 +25,19 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
 Plugin 'mkitt/tabline.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'rhysd/vim-clang-format'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'the-lambda-church/coquille'
 Plugin 'tpope/vim-rsi'
+
+" Plugin 'jalcine/cmake.vim'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'def-lkb/vimbufsync'
+" Plugin 'Blackrush/vim-gocode'
+" Plugin 'the-lambda-church/coquille'
 " Plugin 'vim-scripts/Tabmerge'
 " Plugin 'wting/rust.vim'
 
@@ -154,6 +157,10 @@ vnoremap <leader>su :!xargs shurl<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" C++
+autocmd FileType cpp setlocal shiftwidth=2 tabstop=2
+autocmd FileType cpp ClangFormatAutoEnable
+
 " OCaml
 autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
@@ -191,8 +198,15 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType text setlocal spell
 
 " markdown
+autocmd BufRead,BufNewFile *.md  set filetype=markdown
 autocmd FileType markdown setlocal spell
 
+" IPython
+autocmd BufNewFile,BufRead *.ipy set filetype=ipy
+autocmd FileType ipy setlocal syntax=python
+
+" Protocol buffers
+autocmd FileType proto setlocal shiftwidth=2 tabstop=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline
@@ -216,13 +230,37 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+" Basic options. See :help syntastic-recommended.
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_aggregate_errors = 1
+
+" See :help syntastic-filetype-checkers.
+" clang_tidy can take a *really* long time to run, so it makes sense to
+" disable it. You can run :SyntasticCheck clang_tidy to run it.
+let b:clang_enabled = 0
+if b:clang_enabled
+    let g:syntastic_cpp_checkers = ['gcc', 'clang_tidy']
+endif
 let g:syntastic_ocaml_checkers = ["merlin"]
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
+
+" See :help syntastic-config-makeprg and :help g:syntastic_<lang>_<checker>.
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-stdlib=libc++ -std=c++11'
+let g:syntastic_cpp_clang_tidy_args = '-checks=*'
+let b:look_for_compile_commands = 1
+if b:look_for_compile_commands
+    " By default, clang-tidy includes the '--' flag which for some reason
+    " stops clang_tidy from looking for the `compile_commands.json` file.
+    " Setting this variable removes the '--' flag.
+    let g:syntastic_cpp_clang_tidy_post_args = ''
+endif
+
 let g:syntastic_python_pylint_args = "--errors-only"
-autocmd BufNewFile,BufRead *.ipy set filetype=ipy
-autocmd BufRead,BufNewFile *.md  set filetype=markdown
-autocmd FileType ipy setlocal syntax=python
+
+" See :help syntastic-global-options.
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Gundo
