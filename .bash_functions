@@ -52,3 +52,49 @@ tex() {
     fi
     latexmk -pvc -pdf -quiet "$1" 2>&1 | grep --color -E '^|Failure'
 }
+
+# NERDTree
+nt() {
+    vim +"NERDTree $1"
+}
+
+# Clone a repository from GitHub
+githubclone() {
+    if [[ "$#" -ne 2 ]]; then
+        echo "usage: githubclone <user> <repo>"
+        return
+    fi
+    git clone "git@github.com:$1/$2"
+}
+
+# Random string generation.
+randstring() {
+    if [[ "$#" -eq 0 ]]; then
+        len=50
+    elif [[ "$#" -eq 1 ]]; then
+        len="$1"
+    else
+        echo "usage: randstring <len>";
+        return
+    fi
+    head /dev/urandom | tr -dc A-Za-z0-9 | head -c "$len"; echo ''
+}
+
+# Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.
+print() {
+    if [[ "$#" -lt 1 ]]; then
+        echo "usage: print <file>..."
+    fi
+    lpr -P Soda730 -o sides=two-sided-long-edge "$@"
+}
+
+print_status() {
+    lpq -P Soda730
+}
+
+print_cancel() {
+    if [[ "$#" -lt 1 ]]; then
+        echo "usage: print_cancel <job_id>..."
+    fi
+    lprm -P Soda730 "$@"
+}
