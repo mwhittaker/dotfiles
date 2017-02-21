@@ -1,56 +1,87 @@
-# enable vi mode
+################################################################################
+# Behavior
+################################################################################
+# Enable vi mode when in copy and choice modes.
 set-window-option -g mode-keys vi
 
-# support 256 colors
-set -g default-terminal "screen-256color"
+# Support 256 colors.
+set-option -g default-terminal "screen-256color"
 
-# enable mouse support
-setw -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
+# Enable mouse support.
+set-window-option -g mode-mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-resize-pane on
+set-option -g mouse-select-window on
 
-# only allow arrow keys to be pressed once
+# Only allow arrow keys to be pressed once.
 bind-key Up    select-pane -U
 bind-key Down  select-pane -D
 bind-key Left  select-pane -L
 bind-key Right select-pane -R
 
-# status bar right
-set -g status-right-length 60
-set -g status-right '◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") | ♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") | ♥#(acpi | cut -d "," -f 2) | %I:%M %p'
+# Status line.
+set-option -g status-left-attr bold
+set-option -g window-status-current-attr bold
+set-option -g status-right-length 60
+set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
 
-# default statusbar colors
-set-option -g status-bg   colour235 #base02
-set-option -g status-fg   colour15  #white
-set-option -g status-attr default
+# Display panes forever.
+set-option -g display-panes-time 1000000
 
-# default window title colors
-set-window-option -g window-status-fg colour244 #base0
-set-window-option -g window-status-bg default
+# 12 hour clock.
+set-option -g clock-mode-style 12
 
-# active window title colors
-set-window-option -g window-status-current-fg red
-set-window-option -g window-status-current-bg default
+################################################################################
+# Colors and Styling
+################################################################################
+# - https://github.com/mwhittaker/tmux_color_picker
+# - http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+#
+# light gray: colour246
+# dark gray:  colour237
+# black:      colour233
+#
+# light blue: colour39
+# blue:       colour12
+# dark blue:  colour4
+#
+# yellow: colour228
+# orange: colour214
+# pink:   colour219
 
-# pane border
-set-option -g pane-border-fg        colour52
-set-option -g pane-active-border-fg red
+# Status line (the left and right part of the bar at the bottom of the screen).
+set-option -g status-bg colour233
+set-option -g status-fg white
+set-option -g status-left-bg colour233
+set-option -g status-left-fg white
+set-option -g status-right-bg colour233
+set-option -g status-right-fg white
 
-# message text
-set-option -g message-bg colour235 #base02
+# Windows (the window information at the bottom of the screen)
+set-window-option -g window-status-current-bg colour233
+set-window-option -g window-status-current-fg colour39
+set-window-option -g window-status-last-bg colour233
+set-window-option -g window-status-last-fg colour246
+set-window-option -g window-status-bg colour233
+set-window-option -g window-status-fg colour246
+
+# Command mode (when you hit `C-b :` to enter a command)
+set-option -g message-bg colour233
 set-option -g message-fg white
 
-# pane number display
-set-option -g display-panes-active-colour red
-set-option -g display-panes-colour        white
+# Copy and choice modes (e.g. `C-b C-[` to scroll back and `C-b s` for sessions)
+set-window-option -g mode-bg colour4
+set-window-option -g mode-fg white
 
-# clock
-set-window-option -g clock-mode-colour white
+# Display panes (`C-b q`)
+set-option -g display-panes-active-colour colour39
+set-option -g display-panes-colour colour246
 
-# choose-window
-set-option -g mode-fg red
-set-option -g mode-bg colour235
+# Pane borders.
+# set-option -g pane-active-border-bg none
+set-option -g pane-active-border-fg colour39
+# set-option -g pane-border-bg none
+set-option -g pane-border-fg colour246
 
-# display panes forever
-set-option -g display-panes-time 1000000
+# Clock (`C-b t`)
+set-window-option -g clock-mode-colour colour39

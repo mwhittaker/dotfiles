@@ -25,7 +25,9 @@ install_tmux_conf() {
     if test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then
         link .tmux.conf-1.8 ~/.tmux.conf
     else
-        link .tmux.conf-1.9 ~/.tmux.conf
+        cat .tmux.conf-1.8 > .tmux.conf
+        cat .tmux.conf-1.9 >> .tmux.conf
+        link .tmux.conf ~/.tmux.conf
     fi
 
     command -v nm-tool >/dev/null 2>&1 || echo "PLEASE INSTALL NM-TOOL"
