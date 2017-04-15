@@ -227,15 +227,20 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyMotion_smartcase = 1
 if version >= 703
     map  / <Plug>(easymotion-sn)
     omap / <Plug>(easymotion-tn)
 
-    " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-    " Without these mappings, `n` & `N` works fine. (These mappings just provide
-    " different highlight method and have some other features )
+    " These `n` & `N` mappings are options. You do not have to map `n` & `N`
+    " to EasyMotion. Without these mappings, `n` & `N` works fine. (These
+    " mappings just provide different highlight method and have some other
+    " features )
     map  n <Plug>(easymotion-next)
     map  N <Plug>(easymotion-prev)
+
+    " https://github.com/easymotion/vim-easymotion#default-bindings
+    map <Leader> <Plug>(easymotion-prefix)
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
