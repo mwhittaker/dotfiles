@@ -92,6 +92,13 @@ print_status() {
     lpq -P Soda730
 }
 
+watch_print_status() {
+    # Running `watch print_status` unfortunately does not work; aliases don't
+    # play nicely with `print_status`. Thus, we have a dedicated command for
+    # it.
+    watch -d -n 1 lpq -P Soda730
+}
+
 print_cancel() {
     if [[ "$#" -lt 1 ]]; then
         echo "usage: print_cancel <job_id>..."
