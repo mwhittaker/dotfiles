@@ -185,6 +185,12 @@ map <silent> <leader>ck :CoqKill<cr>
 " html
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
+" css
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+
+" javascript
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+
 " php
 autocmd FileType php setlocal shiftwidth=2 tabstop=2
 
