@@ -131,6 +131,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
 if has('gui_running')
+    set mouse=""
     if has('gui_macvim')
         set guifont=Menlo:h12
     else
