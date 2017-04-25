@@ -53,11 +53,45 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+reset_code() {
+    status=$?
+    echo -en "\e[0m"
+    return $status
+}
+bold_code() {
+    status=$?
+    echo -en "\e[1m"
+    return $status
+}
+color_code() {
+    status=$?
+    echo -en "\e[38;5;$1m"
+    return $status
+}
+
+# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
+timer_start() {
+  timer=${timer:-$SECONDS}
+}
+timer_stop() {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'
-    PS1=$PS1"\`if [ \$? = 0 ]; then echo \[\e[1\;32m\]λ\[\e[0m\]; else echo \[\e[1\;31m\]!\[\e[0m\]; fi\` "
+    # PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'
+    # PS1=$PS1"\`if [ \$? = 0 ]; then echo \[\e[1\;32m\]λ\[\e[0m\]; else echo \[\e[1\;31m\]!\[\e[0m\]; fi\` "
+    PS1='${debian_chroot:+($debian_chroot) }'
+    PS1="$PS1"'$(color_code 228)[${timer_show}s]'
+    PS1="$PS1"'$(color_code 214)[\T]'
+    PS1="$PS1"'$(color_code 219)[\w]'
+    PS1="$PS1"'$(if [ $? = 0 ]; then echo "$(color_code 10)$(bold_code)λ"; else echo "$(color_code 9)$(bold_code)!"; fi)'
+    PS1="$PS1"'$(reset_code) '
 fi
 unset color_prompt force_color_prompt
 
