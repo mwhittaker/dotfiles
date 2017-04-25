@@ -87,11 +87,11 @@ else
     # PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'
     # PS1=$PS1"\`if [ \$? = 0 ]; then echo \[\e[1\;32m\]λ\[\e[0m\]; else echo \[\e[1\;31m\]!\[\e[0m\]; fi\` "
     PS1='${debian_chroot:+($debian_chroot) }'
-    PS1="$PS1"'$(color_code 228)[${timer_show}s]'
-    PS1="$PS1"'$(color_code 214)[\T]'
-    PS1="$PS1"'$(color_code 219)[\w]'
-    PS1="$PS1"'$(if [ $? = 0 ]; then echo "$(color_code 10)$(bold_code)λ"; else echo "$(color_code 9)$(bold_code)!"; fi)'
-    PS1="$PS1"'$(reset_code) '
+    PS1="$PS1"'\[$(color_code 228)\][${timer_show}s]'
+    PS1="$PS1"'\[$(color_code 214)\][\T]'
+    PS1="$PS1"'\[$(color_code 219)\][\w]'
+    PS1="$PS1"'$(if [ $? = 0 ]; then echo \["$(color_code 10)\]\[$(bold_code)\]λ"; else echo "\[$(color_code 9)\]\[$(bold_code)\]!"; fi)'
+    PS1="$PS1"'\[$(reset_code)\] '
 fi
 unset color_prompt force_color_prompt
 
