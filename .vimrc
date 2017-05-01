@@ -23,6 +23,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
+Plugin 'majutsushi/tagbar'
 Plugin 'mkitt/tabline.vim'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'rhysd/vim-clang-format'
@@ -31,12 +32,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/VOoM'
 
-Plugin 'tpope/vim-fugitive'
+Plugin 'triglav/vim-visual-increment'
 
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'def-lkb/vimbufsync'
@@ -119,6 +120,9 @@ set wildmode=longest,list
 
 " Improved history
 set history=1000
+
+" Highlight matching <>. https://goo.gl/R7JD7M
+set matchpairs+=<:>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Advanced Vim
@@ -263,7 +267,7 @@ let g:syntastic_ocaml_checkers = ["merlin"]
 
 " See :help syntastic-config-makeprg and :help g:syntastic_<lang>_<checker>.
 let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-stdlib=libc++ -std=c++11'
+let g:syntastic_cpp_compiler_options = '-std=c++14'
 let g:syntastic_cpp_clang_tidy_args = '-checks=*'
 let b:look_for_compile_commands = 1
 if b:look_for_compile_commands
@@ -316,3 +320,12 @@ let g:ctrlp_working_path_mode = 'c'
 " SuperTab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:SuperTabDefaultCompletionType = 'context'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :help tagbar-configuration
+let g:tagbar_sort = 0
+
+" http://vim.wikia.com/wiki/Single_tags_file_for_a_source_tree
+set tags=tags;
