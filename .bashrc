@@ -71,11 +71,39 @@ color_code() {
 }
 
 # http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
+secs_to_string() {
+    status=$?
+
+    n_secs="$1"
+    n_minutes="$(($n_secs / 60))"
+    n_hours="$(($n_secs / 60 / 60))"
+    n_days="$(($n_secs / 60 / 60/ 24))"
+
+    n_secs_mod="$((${n_secs} % 60))"
+    n_minutes_mod="$(($n_minutes % 60))"
+    n_hours_mod="$(($n_hours % 24))"
+
+
+    seconds="${n_secs_mod}s"
+    if [[ ${n_minutes} -eq 0 ]];
+        then minutes="";
+        else minutes="${n_minutes_mod}m"; fi
+    if [[ ${n_hours} -eq 0 ]];
+        then hours="";
+        else hours="${n_hours_mod}h"; fi
+    if [[ ${n_days} -eq 0 ]];
+        then days="";
+        else days="${n_days}d"; fi
+
+    echo "${days}${hours}${minutes}${seconds}"
+    return $status
+}
 timer_start() {
   timer=${timer:-$SECONDS}
 }
 timer_stop() {
   timer_show=$(($SECONDS - $timer))
+  timer_show="$(secs_to_string $timer_show)"
   unset timer
 }
 trap 'timer_start' DEBUG
@@ -87,7 +115,7 @@ else
     # PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'
     # PS1=$PS1"\`if [ \$? = 0 ]; then echo \[\e[1\;32m\]λ\[\e[0m\]; else echo \[\e[1\;31m\]!\[\e[0m\]; fi\` "
     PS1='${debian_chroot:+($debian_chroot) }'
-    PS1="$PS1"'\[$(color_code 228)\][${timer_show}s]'
+    PS1="$PS1"'\[$(color_code 228)\][${timer_show}]'
     PS1="$PS1"'\[$(color_code 214)\][\T]'
     PS1="$PS1"'\[$(color_code 219)\][\w]'
     PS1="$PS1"'$(if [ $? = 0 ]; then echo \["$(color_code 10)\]\[$(bold_code)\]λ"; else echo "\[$(color_code 9)\]\[$(bold_code)\]!"; fi)'
