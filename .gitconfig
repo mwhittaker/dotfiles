@@ -19,3 +19,5 @@
 	editor = vim
 [diff]
     tool = vimdiff
+[push]
+	default = simple
