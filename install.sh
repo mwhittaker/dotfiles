@@ -12,6 +12,10 @@ install_bash_functions() {
     link .bash_functions ~/.bash_functions
 }
 
+install_bash_path() {
+    link .bash_path ~/.bash_path
+}
+
 install_bashrc() {
     link .bashrc ~/.bashrc
 }
@@ -62,6 +66,7 @@ install_latexmkrc() {
 main() {
     install_bash_aliases
     install_bash_functions
+    install_bash_path
     install_bashrc
     install_gitconfig
     install_tmux_conf
