@@ -1,0 +1,84 @@
+################################################################################
+# Behavior
+################################################################################
+# Enable vi mode when in copy and choice modes.
+set-window-option -g mode-keys vi
+
+# Support 256 colors.
+set-option -g default-terminal "screen-256color"
+
+# Enable mouse support.
+set-option -g mouse on
+
+# Only allow arrow keys to be pressed once.
+bind-key Up    select-pane -U
+bind-key Down  select-pane -D
+bind-key Left  select-pane -L
+bind-key Right select-pane -R
+
+# Status line.
+set-option -g status-left-attr bold
+set-option -g window-status-current-attr bold
+set-option -g status-right-length 60
+set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
+
+# Display panes forever.
+set-option -g display-panes-time 1000000
+
+# 12 hour clock.
+set-option -g clock-mode-style 12
+
+################################################################################
+# Colors and Styling
+################################################################################
+# - https://github.com/mwhittaker/tmux_color_picker
+# - http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+#
+# light gray: colour246
+# dark gray:  colour237
+# black:      colour233
+#
+# light blue: colour39
+# blue:       colour12
+# dark blue:  colour4
+#
+# yellow: colour228
+# orange: colour214
+# pink:   colour219
+
+# Status line (the left and right part of the bar at the bottom of the screen).
+set-option -g status-bg colour233
+set-option -g status-fg white
+set-option -g status-left-bg colour233
+set-option -g status-left-fg white
+set-option -g status-right-bg colour233
+set-option -g status-right-fg white
+
+# Windows (the window information at the bottom of the screen)
+set-window-option -g window-status-current-bg colour233
+set-window-option -g window-status-current-fg colour39
+set-window-option -g window-status-last-bg colour233
+set-window-option -g window-status-last-fg colour246
+set-window-option -g window-status-bg colour233
+set-window-option -g window-status-fg colour246
+
+# Command mode (when you hit `C-b :` to enter a command)
+set-option -g message-bg colour233
+set-option -g message-fg white
+
+# Copy and choice modes (e.g. `C-b C-[` to scroll back and `C-b s` for sessions)
+set-window-option -g mode-bg colour4
+set-window-option -g mode-fg white
+
+# Display panes (`C-b q`)
+set-option -g display-panes-active-colour colour39
+set-option -g display-panes-colour colour246
+
+# Pane borders.
+# set-option -g pane-active-border-bg none
+set-option -g pane-active-border-fg colour39
+# set-option -g pane-border-bg none
+set-option -g pane-border-fg colour246
+
+# Clock (`C-b t`)
+set-window-option -g clock-mode-colour colour39
