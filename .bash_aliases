@@ -1,3 +1,9 @@
+# basics
+if [[ $(uname) = "Darwin" ]]; then
+    alias ls="ls -G"
+    alias grep="grep --color=auto"
+fi
+
 # vim
 alias v="vim"
 alias v-="vim -"
