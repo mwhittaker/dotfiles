@@ -56,17 +56,17 @@ fi
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
 reset_code() {
     status=$?
-    echo -en "\e[0m"
+    printf "\e[0m"
     return $status
 }
 bold_code() {
     status=$?
-    echo -en "\e[1m"
+    printf "\e[1m"
     return $status
 }
 color_code() {
     status=$?
-    echo -en "\e[38;5;$1m"
+    printf "\e[38;5;$1m"
     return $status
 }
 
