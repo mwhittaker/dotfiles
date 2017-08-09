@@ -145,9 +145,9 @@ else
     set t_Co=256
 endif
 
-" highlight 80-character column
+" highlight 80-character column and 100-character column.
 if version >= 703
-    let &colorcolumn=join(range(81,81),",")
+    let &colorcolumn="81,101"
 endif
 
 " remove trailing whitespace on save
