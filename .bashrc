@@ -191,3 +191,8 @@ fi
 # Enable <ctrl-p> and <ctrl-n> shortcuts
 bind 'C-p':history-search-backward
 bind 'C-n':history-search-forward
+
+# Add SSH key.
+if [[ $(uname) = "Darwin" ]]; then
+    ssh-add -K ~/.ssh/id_rsa &> /dev/null
+fi
