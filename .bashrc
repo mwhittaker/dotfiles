@@ -69,45 +69,22 @@ color_code() {
     printf "\e[38;5;$1m"
     return $status
 }
-
-# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
-secs_to_string() {
+git_on() {
     status=$?
-
-    n_secs="$1"
-    n_minutes="$(($n_secs / 60))"
-    n_hours="$(($n_secs / 60 / 60))"
-    n_days="$(($n_secs / 60 / 60/ 24))"
-
-    n_secs_mod="$((${n_secs} % 60))"
-    n_minutes_mod="$(($n_minutes % 60))"
-    n_hours_mod="$(($n_hours % 24))"
-
-
-    seconds="${n_secs_mod}s"
-    if [[ ${n_minutes} -eq 0 ]];
-        then minutes="";
-        else minutes="${n_minutes_mod}m"; fi
-    if [[ ${n_hours} -eq 0 ]];
-        then hours="";
-        else hours="${n_hours_mod}h"; fi
-    if [[ ${n_days} -eq 0 ]];
-        then days="";
-        else days="${n_days}d"; fi
-
-    echo "${days}${hours}${minutes}${seconds}"
+    git status &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo "on "
+    fi
     return $status
 }
-timer_start() {
-  timer=${timer:-$SECONDS}
+git_branch() {
+    status=$?
+    git status &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo "$(git rev-parse --abbrev-ref HEAD) "
+    fi
+    return $status
 }
-timer_stop() {
-  timer_show=$(($SECONDS - $timer))
-  timer_show="$(secs_to_string $timer_show)"
-  unset timer
-}
-trap 'timer_start' DEBUG
-PROMPT_COMMAND=timer_stop
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -122,7 +99,7 @@ else
     PS1="$PS1"'\[$(reset_code)\] in '
     PS1="$PS1"'\[$(color_code 141)\]\w'
     PS1="$PS1"'\[$(reset_code)\] '
-
+    PS1="$PS1"'$(git_on)\[$(color_code 32)\]$(git_branch)'
     PS1="$PS1"'$(if [ $? = 0 ]; then echo \["$(color_code 10)\]\[$(bold_code)\]λ"; else echo "\[$(color_code 9)\]\[$(bold_code)\]!"; fi)'
     PS1="$PS1"'\[$(reset_code)\] '
 fi
