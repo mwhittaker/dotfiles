@@ -73,7 +73,7 @@ git_on() {
     status=$?
     git status &> /dev/null
     if [[ $? -eq 0 ]]; then
-        echo "on "
+        echo " on "
     fi
     return $status
 }
@@ -81,7 +81,7 @@ git_branch() {
     status=$?
     git status &> /dev/null
     if [[ $? -eq 0 ]]; then
-        echo "$(git rev-parse --abbrev-ref HEAD) "
+        echo "$(git rev-parse --abbrev-ref HEAD)"
     fi
     return $status
 }
@@ -96,10 +96,10 @@ else
     PS1="$PS1"'\[$(color_code 160)\]\u'
     PS1="$PS1"'\[$(reset_code)\] at '
     PS1="$PS1"'\[$(color_code 214)\]\h'
+    PS1="$PS1"'\[$(reset_code)\]$(git_on)\[$(color_code 27)\]$(git_branch)'
     PS1="$PS1"'\[$(reset_code)\] in '
     PS1="$PS1"'\[$(color_code 141)\]\w'
     PS1="$PS1"'\[$(reset_code)\] '
-    PS1="$PS1"'$(git_on)\[$(color_code 32)\]$(git_branch)'
     PS1="$PS1"'$(if [ $? = 0 ]; then echo \["$(color_code 10)\]\[$(bold_code)\]λ"; else echo "\[$(color_code 9)\]\[$(bold_code)\]!"; fi)'
     PS1="$PS1"'\[$(reset_code)\] '
 fi
