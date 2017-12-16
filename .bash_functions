@@ -80,6 +80,25 @@ randstring() {
     head /dev/urandom | tr -dc A-Za-z0-9 | head -c "$len"; echo ''
 }
 
+# Copying to clipboard.
+copy() {
+    if [[ "$#" -gt 1 ]]; then
+        echo "Usage: copy [filename]"
+        return 1
+    fi
+
+    if [[ "$(uname)" = "Darwin" ]]; then
+        if [[ "$#" -eq 0 ]]; then
+            pbcopy
+        else
+            cat "$1" | pbcopy
+        fi
+    else
+        echo "Linux not yet implemented."
+        return 1
+    fi
+}
+
 # Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.
 print() {
     if [[ "$#" -lt 1 ]]; then
