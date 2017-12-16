@@ -21,11 +21,6 @@ alias gca="git commit -a"
 alias tmux="tmux -2"
 alias t="tmux"
 alias tnew="tmux new -s"
-alias tsync="tmux setw synchronize-panes on"
-alias tunsync="tmux setw synchronize-panes off"
 
 # misc
-alias ack="ack-grep"
-alias weechat="weechat-curses"
-alias copy="xclip -selection clipboard"
 alias chrome="google-chrome"
