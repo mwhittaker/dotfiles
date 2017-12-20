@@ -67,19 +67,6 @@ githubclone() {
     git clone "git@github.com:$1/$2"
 }
 
-# Random string generation.
-randstring() {
-    if [[ "$#" -eq 0 ]]; then
-        len=50
-    elif [[ "$#" -eq 1 ]]; then
-        len="$1"
-    else
-        echo "usage: randstring <len>";
-        return
-    fi
-    head /dev/urandom | tr -dc A-Za-z0-9 | head -c "$len"; echo ''
-}
-
 # Copying to clipboard.
 copy() {
     if [[ "$#" -gt 1 ]]; then
