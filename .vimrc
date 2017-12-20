@@ -37,12 +37,12 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
 
-Plugin 'triglav/vim-visual-increment'
-
+" Seldom used plugins.
+" Plugin 'Blackrush/vim-gocode'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'def-lkb/vimbufsync'
-" Plugin 'Blackrush/vim-gocode'
 " Plugin 'the-lambda-church/coquille'
+" Plugin 'triglav/vim-visual-increment'
 " Plugin 'vim-scripts/Tabmerge'
 " Plugin 'wting/rust.vim'
 
@@ -65,46 +65,33 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" leader
+" Map the leader to the space character.
 let mapleader = "\<Space>"
 set notimeout
 
-" prevent pinky fatigue
+" Alias escape to control-c; pressing control-c is significantly easier than
+" pressing escape.
 noremap <C-c> <Esc>
 
-" line numbering
+" Turn on line numbers.
 set number
 
-" tabs and indents
+" Configure indentation and spaces over tabs.
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" easier command line navigation
-cnoremap <c-p> <up>
-cnoremap <c-n> <down>
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-
-" easier tab navigation
+" Configure tabs.
 set tabpagemax=20
 nnoremap <tab> gt
 nnoremap <s-tab> gT
-nnoremap <leader>1 1gt<cr>
-nnoremap <leader>2 2gt<cr>
-nnoremap <leader>3 3gt<cr>
-nnoremap <leader>4 4gt<cr>
-nnoremap <leader>5 5gt<cr>
-nnoremap <leader>6 6gt<cr>
-nnoremap <leader>7 7gt<cr>
-nnoremap <leader>8 8gt<cr>
-nnoremap <leader>9 9gt<cr>
 
-" easier window navigation
+" Configure window splitting and navigation.
 set splitbelow
 set splitright
 nnoremap <c-h> <c-w>h
@@ -112,22 +99,28 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" enable vim modelines
+" Enable vim modelines.
 set modeline
 
-" bash-like tab completion
+" Enable bash-like tab completion.
 set wildmode=longest,list
 
-" Improved history
+" Increase history size.
 set history=1000
 
 " Highlight matching <>. https://goo.gl/R7JD7M
 set matchpairs+=<:>
 
+" TODO(mwhittaker): Make control-k clear the line in command mode.
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Advanced Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set font
+" Set the font and color scheme. See [1] for details on setting the
+" colorscheme. The jellybeans color scheme is provided by the
+" 'flazz/vim-colorschemes' plugin.
+"
+" [1]: https://stackoverflow.com/a/5702498
 syntax on
 try
     colorscheme jellybeans
@@ -145,91 +138,131 @@ else
     set t_Co=256
 endif
 
-" highlight 80-character column and 100-character column.
+" Highlight 80-character column and 100-character column.
 if version >= 703
-    let &colorcolumn="81,101"
+    set colorcolumn=81,101
 endif
 
-" remove trailing whitespace on save
+" Remove trailing whitespace on save.
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
     %s/\s\+$//e
     call cursor(l, c)
 endfun
+augroup strip_trailing_whitespace_group
+    autocmd!
+    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+augroup END
 
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-" URL Shortener
-vnoremap <leader>su :!xargs shurl<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Programming Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" C++
-autocmd FileType cpp setlocal shiftwidth=2 tabstop=2
-autocmd FileType cpp ClangFormatAutoEnable
+" c++
+augroup cpp_settings_group
+    autocmd!
+    autocmd FileType cpp setlocal shiftwidth=2 tabstop=2
+    autocmd FileType cpp ClangFormatAutoEnable
+augroup END
 
-" OCaml
-autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-" SQL
-let g:omni_sql_no_default_maps = 1
-
-" Coq
+" coq
 let g:coquille_auto_move = 'true'
-map <silent> <leader>cl :CoqLaunch<cr>
-map <silent> <leader>cc :CoqToCursor<cr>
-map <silent> <leader>cn :CoqNext<cr>
-map <silent> <leader>cu :CoqUndo<cr>
-map <silent> <leader>ck :CoqKill<cr>
-
-" html
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+nnoremap <silent> <leader>cl :CoqLaunch<cr>
+nnoremap <silent> <leader>cc :CoqToCursor<cr>
+nnoremap <silent> <leader>cn :CoqNext<cr>
+nnoremap <silent> <leader>cu :CoqUndo<cr>
+nnoremap <silent> <leader>ck :CoqKill<cr>
 
 " css
-autocmd FileType css setlocal shiftwidth=2 tabstop=2
-
-" javascript
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-
-" php
-autocmd FileType php setlocal shiftwidth=2 tabstop=2
-
-" tex
-autocmd FileType tex setlocal shiftwidth=2 tabstop=2
-autocmd FileType tex setlocal spell
-autocmd Syntax tex syn region texZone start="\\begin{pycode}" end="\\end{pycode}"
-
-" verilog
-autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
+augroup css_settings_group
+    autocmd!
+    autocmd FileType css setlocal shiftwidth=2 tabstop=2
+augroup END
 
 " go
-autocmd FileType go setlocal noexpandtab
+augroup go_settings_group
+    autocmd!
+    autocmd FileType go setlocal noexpandtab
+augroup END
 
-" text
-autocmd FileType text setlocal spell
+" html
+augroup html_settings_group
+    autocmd!
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2
+    autocmd FileType html setlocal cursorcolumn
+augroup END
+
+" ipython
+augroup ipython_settings_group
+    autocmd!
+    autocmd BufNewFile,BufRead *.ipy set filetype=ipy
+    autocmd FileType ipy setlocal syntax=python
+augroup END
+
+" javascript
+augroup javascript_settings_group
+    autocmd!
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+augroup END
 
 " markdown
-autocmd BufRead,BufNewFile *.md  set filetype=markdown
-autocmd FileType markdown setlocal spell
+augroup markdown_settings_group
+    autocmd!
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd FileType markdown setlocal spell
+augroup END
 
-" IPython
-autocmd BufNewFile,BufRead *.ipy set filetype=ipy
-autocmd FileType ipy setlocal syntax=python
+" ocaml
+augroup ocaml_settings_group
+    autocmd!
+    autocmd FileType ocaml setlocal shiftwidth=2 tabstop=2
+augroup END
+" If the opam executable is found, then we run these commands to set up
+" merlin. If opam is not installed, then running these two commands will not
+" work.
+if executable("opam")
+    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+endif
 
-" Protocol buffers
-autocmd FileType proto setlocal shiftwidth=2 tabstop=2
+" php
+augroup php_settings_group
+    autocmd!
+    autocmd FileType php setlocal shiftwidth=2 tabstop=2
+augroup END
+
+" protocol buffers
+augroup proto_settings_group
+    autocmd!
+    autocmd FileType proto setlocal shiftwidth=2 tabstop=2
+augroup END
+
+" sql
+let g:omni_sql_no_default_maps = 1
+
+" tex
+augroup tex_settings_group
+    autocmd!
+    autocmd FileType tex setlocal shiftwidth=2 tabstop=2
+    autocmd FileType tex setlocal spell
+augroup END
+
+" text
+augroup text_settings_group
+    autocmd!
+    autocmd FileType text setlocal spell
+augroup END
+
+" verilog
+augroup verilog_settings_group
+    autocmd!
+    autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
+augroup END
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set laststatus=2
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-easymotion
+" Lokaltog/vim-easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_smartcase = 1
 if version >= 703
@@ -247,8 +280,57 @@ if version >= 703
     map <Leader> <Plug>(easymotion-prefix)
 endif
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic
+"bling/vim-airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ervandew/supertab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:SuperTabDefaultCompletionType = 'context'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" kien/ctrlp.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_working_path_mode = 'c'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" majutsushi/tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :help tagbar-configuration
+let g:tagbar_sort = 0
+
+" http://vim.wikia.com/wiki/Single_tags_file_for_a_source_tree
+set tags=tags;
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" scrooloose/nerdcommenter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Reset some of NERDCommenter's default comment delimiters. See
+" https://github.com/scrooloose/nerdcommenter/issues/33 for more information.
+let g:NERDCustomDelimiters = {
+    \ 'c':          { 'left': '// ', 'right': '',      'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'cpp':        { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'haskell':    { 'left': '-- ',                   'leftAlt': '{- ', 'rightAlt': ' -}' },
+    \ 'java':       { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'javascript': { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
+    \ 'matlab':     { 'left': '% '                                                         },
+    \ 'ocaml':      { 'left': '(* ', 'right': ' *)'                                        },
+    \ 'python':     { 'left': '# '                                                         },
+    \ 'sh':         { 'left': '# '                                                         },
+    \ 'tex':        { 'left': '% '                                                         },
+    \ 'tmux':       { 'left': '# '                                                         },
+\ }
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"scrooloose/syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic options. See :help syntastic-recommended.
 let g:syntastic_always_populate_loc_list = 1
@@ -282,50 +364,14 @@ let g:syntastic_python_pylint_args = "--errors-only"
 " See :help syntastic-global-options.
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['ipy', 'tex'] }
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Gundo
+" sjl/gundo.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>u :GundoToggle<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDCommenter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Reset some of NERDCommenter's default comment delimiters. See
-" https://github.com/scrooloose/nerdcommenter/issues/33 for more information.
-let g:NERDCustomDelimiters = {
-    \ 'c':          { 'left': '// ', 'right': '',      'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'cpp':        { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'haskell':    { 'left': '-- ',                   'leftAlt': '{- ', 'rightAlt': ' -}' },
-    \ 'java':       { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'javascript': { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'matlab':     { 'left': '% '                                                         },
-    \ 'ocaml':      { 'left': '(* ', 'right': ' *)'                                        },
-    \ 'python':     { 'left': '# '                                                         },
-    \ 'sh':         { 'left': '# '                                                         },
-    \ 'tex':        { 'left': '% '                                                         },
-    \ 'tmux':       { 'left': '# '                                                         },
-\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Multiple Cursors
+" terryma/vim-multiple-cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:multi_cursor_quit_key='<C-c>'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ctrlp
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 'c'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SuperTab
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:SuperTabDefaultCompletionType = 'context'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" :help tagbar-configuration
-let g:tagbar_sort = 0
-
-" http://vim.wikia.com/wiki/Single_tags_file_for_a_source_tree
-set tags=tags;
