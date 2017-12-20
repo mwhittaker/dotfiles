@@ -115,12 +115,13 @@ set history=1000
 " Highlight matching <>. https://goo.gl/R7JD7M
 set matchpairs+=<:>
 
-" Emulate bash's c-p and c-n commands. Note that this is not the default
-" behavior installed by 'tpope/vim-rsi'.
+" Emulate bash's c-p, c-n, and c-k commands in command mode. Note that these
+" are not set by 'tpope/vim-rsi'. See [1] for more info on the <c-k> mapping.
+"
+" [1]: https://github.com/tpope/vim-rsi/issues/15
 cnoremap <c-p> <up>
 cnoremap <c-n> <down>
-
-" TODO(mwhittaker): Make control-k clear the line in command mode.
+cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Advanced Vim
