@@ -41,6 +41,11 @@ Plugin 'tpope/vim-surround'
 Plugin 'kana/vim-textobj-user'
 Plugin 'rbonvall/vim-textobj-latex'
 
+" typescript plugins.
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'leafgarland/typescript-vim'
+
 " Seldom used plugins.
 " Plugin 'Blackrush/vim-gocode'
 " Plugin 'altercation/vim-colors-solarized'
@@ -258,6 +263,12 @@ augroup tex_settings_group
     autocmd FileType tex setlocal spell
 augroup END
 
+" typescript
+augroup typescript_settings_group
+    autocmd!
+    autocmd BufNewFile,BufRead *.ts setlocal shiftwidth=2 tabstop=2
+augroup END
+
 " text
 augroup text_settings_group
     autocmd!
@@ -290,6 +301,13 @@ if version >= 703
     map <Leader> <Plug>(easymotion-prefix)
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quramy/tsuquyomi
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup tsuquyomi_group
+    autocmd!
+    autocmd FileType typescript nnoremap <buffer> <Leader>t :<C-u>echo tsuquyomi#hint()<CR>
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "bling/vim-airline
@@ -356,6 +374,10 @@ if b:clang_enabled
     let g:syntastic_cpp_checkers = ['gcc', 'clang_tidy']
 endif
 let g:syntastic_ocaml_checkers = ["merlin"]
+
+" Typescript (see https://github.com/Quramy/tsuquyomi)
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 
 " See :help syntastic-config-makeprg and :help g:syntastic_<lang>_<checker>.
 let g:syntastic_cpp_compiler = 'clang++'
