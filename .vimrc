@@ -37,7 +37,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
 
-" 'vim-textobj-user' has to be installed before 'vim-textobj-latex'
+" 'vim-textobj-user' has to be installed before 'vim-textobj-latex'.
 Plugin 'kana/vim-textobj-user'
 Plugin 'rbonvall/vim-textobj-latex'
 
