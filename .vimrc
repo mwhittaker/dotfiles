@@ -343,17 +343,17 @@ set tags=tags;
 " Reset some of NERDCommenter's default comment delimiters. See
 " https://github.com/scrooloose/nerdcommenter/issues/33 for more information.
 let g:NERDCustomDelimiters = {
-    \ 'c':          { 'left': '// ', 'right': '',      'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'cpp':        { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'haskell':    { 'left': '-- ',                   'leftAlt': '{- ', 'rightAlt': ' -}' },
-    \ 'java':       { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'javascript': { 'left': '// ',                   'leftAlt': '/* ', 'rightAlt': ' */' },
-    \ 'matlab':     { 'left': '% '                                                         },
-    \ 'ocaml':      { 'left': '(* ', 'right': ' *)'                                        },
-    \ 'python':     { 'left': '# '                                                         },
-    \ 'sh':         { 'left': '# '                                                         },
-    \ 'tex':        { 'left': '% '                                                         },
-    \ 'tmux':       { 'left': '# '                                                         },
+    \ 'c':          { 'left': '//', 'right': '', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'cpp':        { 'left': '//',              'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'haskell':    { 'left': '--',              'leftAlt': '{-', 'rightAlt': '-}' },
+    \ 'java':       { 'left': '//',              'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'javascript': { 'left': '//',              'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'matlab':     { 'left': '%'                                                  },
+    \ 'ocaml':      { 'left': '(*', 'right': '*)'                                  },
+    \ 'python':     { 'left': '#'                                                  },
+    \ 'sh':         { 'left': '#'                                                  },
+    \ 'tex':        { 'left': '%'                                                  },
+    \ 'tmux':       { 'left': '#'                                                  },
 \ }
 " Add spaces after comment delimiters by default.
 let g:NERDSpaceDelims = 1
