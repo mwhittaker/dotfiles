@@ -71,17 +71,21 @@ color_code() {
 }
 git_on() {
     status=$?
-    git status &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        echo " on "
+    in_git_repo="$(git rev-parse --is-inside-work-tree 2> /dev/null)"
+    if [[ "$in_git_repo" = "true" ]]; then
+        echo " on ";
     fi
     return $status
 }
 git_branch() {
     status=$?
-    git status &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        echo "$(git rev-parse --abbrev-ref HEAD)"
+    in_git_repo="$(git rev-parse --is-inside-work-tree 2> /dev/null)"
+    if [[ "$in_git_repo" = "true" ]]; then
+        if [[ -n "$(git branch)" ]]; then
+            echo "$(git rev-parse --abbrev-ref HEAD)";
+        else
+            echo "(empty)";
+        fi
     fi
     return $status
 }
