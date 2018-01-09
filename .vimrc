@@ -365,7 +365,7 @@ let g:NERDCommentEmptyLines = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"scrooloose/syntastic
+" scrooloose/syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic options. See :help syntastic-recommended.
 let g:syntastic_always_populate_loc_list = 1
@@ -408,7 +408,6 @@ let g:syntastic_python_pylint_args = "--errors-only"
 " sjl/gundo.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>u :GundoToggle<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " terryma/vim-multiple-cursors
