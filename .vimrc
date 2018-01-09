@@ -385,6 +385,7 @@ let b:clang_enabled = 0
 if b:clang_enabled
     let g:syntastic_cpp_checkers = ['gcc', 'clang_tidy']
 endif
+let g:syntastic_python_checkers = ["python", "pylint", "mypy"]
 let g:syntastic_ocaml_checkers = ["merlin"]
 
 " Typescript (see https://github.com/Quramy/tsuquyomi)
@@ -403,6 +404,7 @@ if b:look_for_compile_commands
     let g:syntastic_cpp_clang_tidy_post_args = ''
 endif
 
+let g:syntastic_python_mypy_args = "--ignore-missing-imports"
 let g:syntastic_python_pylint_args = "--errors-only"
 
 " See :help syntastic-global-options.
