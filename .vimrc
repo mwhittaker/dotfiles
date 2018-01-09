@@ -298,7 +298,7 @@ if version >= 703
     map  N <Plug>(easymotion-prev)
 
     " https://github.com/easymotion/vim-easymotion#default-bindings
-    map <Leader> <Plug>(easymotion-prefix)
+    " map <Leader> <Plug>(easymotion-prefix)
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
