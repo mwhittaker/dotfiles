@@ -46,6 +46,9 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'leafgarland/typescript-vim'
 
+" markdown plugins.
+Plugin 'tpope/vim-markdown'
+
 " Seldom used plugins.
 " Plugin 'Blackrush/vim-gocode'
 " Plugin 'altercation/vim-colors-solarized'
@@ -226,6 +229,8 @@ augroup markdown_settings_group
     autocmd!
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd FileType markdown setlocal spell
+    autocmd FileType markdown let @i = "S_"
+    autocmd FileType markdown let @b = "S_gvS_"
 augroup END
 
 " ocaml
