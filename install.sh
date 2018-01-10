@@ -3,7 +3,7 @@
 set -euo pipefail
 
 link() {
-    ln -s -i "$(pwd)/$1" $2
+    ln -s -i "$(pwd)/$1" $2 || true
 }
 
 install_bash_aliases() {
