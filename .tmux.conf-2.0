@@ -31,6 +31,10 @@ set-option -g display-panes-time 1000000
 # 12 hour clock.
 set-option -g clock-mode-style 12
 
+# Make commands like `open` work for macos. See https://goo.gl/mV6XZv for more
+# information.
+if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux.conf-macos'
+
 ################################################################################
 # Colors and Styling
 ################################################################################

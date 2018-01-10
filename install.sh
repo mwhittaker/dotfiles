@@ -38,6 +38,10 @@ install_tmux_conf() {
         link .tmux.conf-2.0 ~/.tmux.conf
     fi
 
+    if [[ $(uname) = "Darwin" ]]; then
+        link .tmux.conf-macos ~/.tmux.conf-macos
+    fi
+
     command -v nm-tool >/dev/null 2>&1 || echo "PLEASE INSTALL NM-TOOL"
     command -v amixer  >/dev/null 2>&1 || echo "PLEASE INSTALL AMIXER"
     command -v acpi    >/dev/null 2>&1 || echo "PLEASE INSTALL ACPI"
