@@ -1,4 +1,6 @@
-#! /bin/sh
+#! /usr/bin/env bash
+
+set -euo pipefail
 
 link() {
     ln -s -i "$(pwd)/$1" $2
