@@ -63,6 +63,7 @@ install_vimrc() {
 }
 
 install_xmonad_hs() {
+    # TODO(mwhittaker): Only install xmonad if we're running on linux.
     mkdir -p ~/.xmonad
     link xmonad.hs ~/.xmonad/xmonad.hs
 }
