@@ -86,6 +86,21 @@ copy() {
     fi
 }
 
+tdir() {
+    if [[ -n "$TMUX" ]]; then
+        echo "ERROR: you cannot run tdir from within tmux."
+        return 1
+    fi
+
+    if [[ "$#" -eq 0 ]]; then
+        tmux new-session -s "${PWD##*/}"
+    fi
+
+    for d in "$@"; do
+        tmux new-session -d -c "$d" -s "$(basename $d)"
+    done
+}
+
 # Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.
 print() {
     if [[ "$#" -lt 1 ]]; then
