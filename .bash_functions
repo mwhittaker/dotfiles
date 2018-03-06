@@ -67,17 +67,38 @@ githubclone() {
     git clone "git@github.com:$1/$2"
 }
 
-# Random string generation.
-randstring() {
-    if [[ "$#" -eq 0 ]]; then
-        len=50
-    elif [[ "$#" -eq 1 ]]; then
-        len="$1"
-    else
-        echo "usage: randstring <len>";
-        return
+# Copying to clipboard.
+copy() {
+    if [[ "$#" -gt 1 ]]; then
+        echo "Usage: copy [filename]"
+        return 1
     fi
-    head /dev/urandom | tr -dc A-Za-z0-9 | head -c "$len"; echo ''
+
+    if [[ "$(uname)" = "Darwin" ]]; then
+        if [[ "$#" -eq 0 ]]; then
+            pbcopy
+        else
+            cat "$1" | pbcopy
+        fi
+    else
+        echo "Linux not yet implemented."
+        return 1
+    fi
+}
+
+tdir() {
+    if [[ -n "$TMUX" ]]; then
+        echo "ERROR: you cannot run tdir from within tmux."
+        return 1
+    fi
+
+    if [[ "$#" -eq 0 ]]; then
+        tmux new-session -s "${PWD##*/}"
+    fi
+
+    for d in "$@"; do
+        tmux new-session -d -c "$d" -s "$(basename $d)"
+    done
 }
 
 # Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.

@@ -1,7 +1,9 @@
-#! /bin/sh
+#! /usr/bin/env bash
+
+set -euo pipefail
 
 link() {
-    ln -s -i "$(pwd)/$1" $2
+    ln -s -i "$(pwd)/$1" $2 || true
 }
 
 install_bash_aliases() {
@@ -36,6 +38,10 @@ install_tmux_conf() {
         link .tmux.conf-2.0 ~/.tmux.conf
     fi
 
+    if [[ $(uname) = "Darwin" ]]; then
+        link .tmux.conf-macos ~/.tmux.conf-macos
+    fi
+
     command -v nm-tool >/dev/null 2>&1 || echo "PLEASE INSTALL NM-TOOL"
     command -v amixer  >/dev/null 2>&1 || echo "PLEASE INSTALL AMIXER"
     command -v acpi    >/dev/null 2>&1 || echo "PLEASE INSTALL ACPI"
@@ -57,6 +63,7 @@ install_vimrc() {
 }
 
 install_xmonad_hs() {
+    # TODO(mwhittaker): Only install xmonad if we're running on linux.
     mkdir -p ~/.xmonad
     link xmonad.hs ~/.xmonad/xmonad.hs
 }
