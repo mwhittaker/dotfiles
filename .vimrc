@@ -256,25 +256,36 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
 
-" See :help syntastic-filetype-checkers.
-" clang_tidy can take a *really* long time to run, so it makes sense to
-" disable it. You can run :SyntasticCheck clang_tidy to run it.
-let b:clang_enabled = 0
-if b:clang_enabled
-    let g:syntastic_cpp_checkers = ['gcc', 'clang_tidy']
-endif
+" Language specific checkers. See :help syntastic-filetype-checkers.
+let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_ocaml_checkers = ["merlin"]
 
-" See :help syntastic-config-makeprg and :help g:syntastic_<lang>_<checker>.
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++14'
-let g:syntastic_cpp_clang_tidy_args = '-checks=*'
+" Clang-Tidy configuration.
+let b:clang_tidy_enabled = 0
 let b:look_for_compile_commands = 1
-if b:look_for_compile_commands
-    " By default, clang-tidy includes the '--' flag which for some reason
-    " stops clang_tidy from looking for the `compile_commands.json` file.
-    " Setting this variable removes the '--' flag.
-    let g:syntastic_cpp_clang_tidy_post_args = ''
+if b:clang_tidy_enabled
+    " clang_tidy can take a *really* long time to run, so it makes sense to
+    " disable it. You can run :SyntasticCheck clang_tidy to run it.
+    let g:syntastic_cpp_checkers += ['clang_tidy']
+    let g:syntastic_cpp_clang_tidy_args = '-checks=*'
+
+    if b:look_for_compile_commands
+        " By default, clang-tidy includes the '--' flag which for some reason
+        " stops clang_tidy from looking for the `compile_commands.json` file.
+        " Setting this variable removes the '--' flag.
+        let g:syntastic_cpp_clang_tidy_post_args = ''
+    endif
+endif
+
+" C++ configuration. See
+" - :help syntastic-config-makeprg
+" - :help g:syntastic_cpp_compiler_options
+" - :help g:syntastic_<lang>_<checker>.
+let b:use_clang = 0
+if b:use_clang
+    let g:syntastic_cpp_compiler = 'clang++'
+else
+    let g:syntastic_cpp_compiler = 'g++'
 endif
 
 let g:syntastic_python_pylint_args = "--errors-only"
@@ -328,4 +339,4 @@ let g:ctrlp_working_path_mode = 'c'
 let g:tagbar_sort = 0
 
 " http://vim.wikia.com/wiki/Single_tags_file_for_a_source_tree
-set tags=tags;
+set tags=tags,TAGS
