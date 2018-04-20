@@ -101,6 +101,10 @@ tdir() {
     done
 }
 
+tpane() {
+    tmux display -pt "${TMUX_PANE:?}" '#{pane_index}'
+}
+
 # Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.
 print() {
     if [[ "$#" -lt 1 ]]; then
