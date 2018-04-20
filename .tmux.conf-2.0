@@ -35,6 +35,13 @@ set-option -g clock-mode-style 12
 # information.
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux.conf-macos'
 
+# Resize panes with hjkl instead of arrow keys. On macos, C-up for example, is
+# gobbled before tmux can get to it.
+bind-key C-h resize-pane -L
+bind-key C-j resize-pane -D
+bind-key C-k resize-pane -U
+bind-key C-l resize-pane -R
+
 ################################################################################
 # Colors and Styling
 ################################################################################
