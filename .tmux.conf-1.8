@@ -23,7 +23,7 @@ bind-key Right select-pane -R
 set-option -g status-left-attr bold
 set-option -g window-status-current-attr bold
 set-option -g status-right-length 60
-set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%a, %b %d,%I:%M %p'
+set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
 
 # Display panes forever.
 set-option -g display-panes-time 1000000
