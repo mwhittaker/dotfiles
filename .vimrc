@@ -16,8 +16,10 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
@@ -260,6 +262,12 @@ augroup proto_settings_group
     autocmd FileType proto setlocal shiftwidth=2 tabstop=2
 augroup END
 
+" scala
+augroup scala_settings_group
+    autocmd!
+    autocmd BufWrite *.scala :Autoformat
+augroup END
+
 " sql
 let g:omni_sql_no_default_maps = 1
 
@@ -288,6 +296,12 @@ augroup verilog_settings_group
     autocmd FileType verilog setlocal shiftwidth=2 tabstop=2
 augroup END
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Chiel92/vim-autoformat
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:formatdef_scalafmt = "'ng scalafmt --stdin'"
+let g:formatters_scala = ['scalafmt']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lokaltog/vim-easymotion
