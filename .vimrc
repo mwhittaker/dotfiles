@@ -300,7 +300,7 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Chiel92/vim-autoformat
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:formatdef_scalafmt = "'ng scalafmt --stdin'"
+let g:formatdef_scalafmt = "'ng org.scalafmt.cli.Cli --stdin'"
 let g:formatters_scala = ['scalafmt']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
