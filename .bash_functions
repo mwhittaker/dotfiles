@@ -105,28 +105,43 @@ tpane() {
     tmux display -pt "${TMUX_PANE:?}" '#{pane_index}'
 }
 
-# Printing. See https://iris.eecs.berkeley.edu/15-faq/10-unix/00-printing.html.
-print() {
-    if [[ "$#" -lt 1 ]]; then
-        echo "usage: print <file>..."
-    fi
-    lpr -P Soda730 -o sides=two-sided-long-edge "$@"
+# Let's say you open up a fresh terminal. Bash stores a history of the commands
+# you type into this terminal in two places.
+#
+#   1. Bash stores history in memory. The number of commands that are stored in
+#      memory is controlled by the HISTSIZE variable.
+#   2. Bash stores history in ~/.bash_history. The number of commands that are
+#      stored in this file is controlled by the HISTFILESIZE variable.
+#
+# When you open up a fresh terminal, bash reads history from ~/.bash_history
+# and loads it in memory. When you enter commands, bash caches the commands in
+# memory and doesn't write them to ~/.bash_history. When you exit the terminal,
+# then bash copies the commands in memory into ~/.bash_history.
+#
+# Most of the time, this policy of caching history and writing it to a file
+# only when the terminal exits is great. However, it can sometimes be
+# inconvenient when working with multiple tmux panes. The history of one pane
+# cannot be used by another.
+#
+# write_history and read_history are two commands to help share history across
+# tmux panes. write_history flushes in-memory history to ~/.bash_history, and
+# read_history reloads in-memory history from ~/.bash_history. So if you run a
+# command in one tmux pane and want to share it with another, simply run
+# write_history in the first pane and read_history in the second.
+#
+# See `help history` for more information on how history works.
+write_history() {
+    # Write our in-memory history to ~/.bash_history.
+    history -a
 }
 
-print_status() {
-    lpq -P Soda730
-}
+read_history() {
+    # Write our in-memory history to ~/.bash_history, so that it's not lost.
+    history -a
 
-watch_print_status() {
-    # Running `watch print_status` unfortunately does not work; aliases don't
-    # play nicely with `print_status`. Thus, we have a dedicated command for
-    # it.
-    watch -d -n 1 lpq -P Soda730
-}
+    # Clear our in-memory history.
+    history -c
 
-print_cancel() {
-    if [[ "$#" -lt 1 ]]; then
-        echo "usage: print_cancel <job_id>..."
-    fi
-    lprm -P Soda730 "$@"
+    # Load our in-memory history from ~/.bash_history.
+    history -r
 }
