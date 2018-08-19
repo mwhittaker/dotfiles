@@ -1,5 +1,8 @@
-# http://askubuntu.com/a/110933
-# Go up directory tree X number of directories
+# `.. n` goes up the directory tree `n` times. For example, `.. 3` is
+# equivalent to `cd ../../..`. `..` is equivalent to `cd ..`. see [1] for more
+# information.
+#
+# [1]: http://askubuntu.com/a/110933
 ..() {
     COUNTER="$@";
 
@@ -24,7 +27,19 @@
     fi
 }
 
-# preview options for ..
+# `...` shows a preview of all parent directories to make it easier to run
+# `..`. For example,
+#
+#   $ ...
+#    0. /Users/mwhittaker/git/mwhittaker/dotfiles [0]
+#    1. /Users/mwhittaker/git/mwhittaker [1]
+#    2. /Users/mwhittaker/git [2]
+#    3. /Users/mwhittaker [3]
+#    4. /Users [4]
+#    5. / [5]
+#   $ .. 3
+#   $ pwd
+#   /Users/mwhittaker
 ...() {
     dir="$(pwd)"
     i=0
