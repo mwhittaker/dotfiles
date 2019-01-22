@@ -16,10 +16,11 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+
+" Core plugins.
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'ervandew/supertab'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'godlygeek/tabular'
@@ -27,10 +28,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
 Plugin 'majutsushi/tagbar'
 Plugin 'mkitt/tabline.vim'
-Plugin 'mwhittaker/dedalus-vim'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'rhysd/vim-clang-format'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -41,26 +38,19 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
 
+" Language specific plugins.
+" Plugin 'derekwyatt/vim-scala'             " scala
+" Plugin 'mwhittaker/dedalus-vim'           " dedalus
+" Plugin 'octol/vim-cpp-enhanced-highlight' " c++
+" Plugin 'rhysd/vim-clang-format'           " c++
+" Plugin 'puppetlabs/puppet-syntax-vim'     " puppet
+" Plugin 'Quramy/tsuquyomi'                 " typescript
+" Plugin 'Shougo/vimproc.vim'               " typescript
+" Plugin 'leafgarland/typescript-vim'       " typescript
+" Plugin 'tpope/vim-markdown'               " markdown
 " 'vim-textobj-user' has to be installed before 'vim-textobj-latex'.
-Plugin 'kana/vim-textobj-user'
-Plugin 'rbonvall/vim-textobj-latex'
-
-" typescript plugins.
-Plugin 'Quramy/tsuquyomi'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'leafgarland/typescript-vim'
-
-" markdown plugins.
-Plugin 'tpope/vim-markdown'
-
-" Seldom used plugins.
-" Plugin 'Blackrush/vim-gocode'
-" Plugin 'altercation/vim-colors-solarized'
-" Plugin 'def-lkb/vimbufsync'
-" Plugin 'the-lambda-church/coquille'
-" Plugin 'triglav/vim-visual-increment'
-" Plugin 'vim-scripts/Tabmerge'
-" Plugin 'wting/rust.vim'
+" Plugin 'kana/vim-textobj-user'            " latex
+" Plugin 'rbonvall/vim-textobj-latex'       " latex
 
 if version >= 703
     Plugin 'Lokaltog/vim-easymotion'
