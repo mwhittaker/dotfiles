@@ -39,6 +39,7 @@ Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
 
 " Language specific plugins.
+" Plugin 'chrisbra/csv.vim'                 " csv
 " Plugin 'derekwyatt/vim-scala'             " scala
 " Plugin 'mwhittaker/dedalus-vim'           " dedalus
 " Plugin 'octol/vim-cpp-enhanced-highlight' " c++
@@ -292,6 +293,13 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:formatdef_scalafmt = "'ng org.scalafmt.cli.Cli --stdin'"
 let g:formatters_scala = ['scalafmt']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" chrisbra/csv.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:csv_no_conceal = 1
+let g:csv_hiGroup = 'Visual'
+hi link CSVDelimiter Normal
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lokaltog/vim-easymotion
