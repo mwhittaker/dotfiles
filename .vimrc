@@ -45,6 +45,7 @@ Plugin 'tpope/vim-surround'
 " Plugin 'octol/vim-cpp-enhanced-highlight' " c++
 " Plugin 'rhysd/vim-clang-format'           " c++
 " Plugin 'puppetlabs/puppet-syntax-vim'     " puppet
+" Plugin 'florentc/vim-tla'                 " tla
 " Plugin 'Quramy/tsuquyomi'                 " typescript
 " Plugin 'Shougo/vimproc.vim'               " typescript
 " Plugin 'leafgarland/typescript-vim'       " typescript
@@ -267,6 +268,12 @@ augroup tex_settings_group
     autocmd!
     autocmd FileType tex setlocal shiftwidth=2 tabstop=2
     autocmd FileType tex setlocal spell
+augroup END
+
+" TLA+
+augroup tla_settings_group
+    autocmd!
+    autocmd FileType tla setlocal shiftwidth=2 tabstop=2
 augroup END
 
 " typescript
