@@ -17,25 +17,17 @@ bind-key Left  select-pane -L
 bind-key Right select-pane -R
 
 # Status line.
-set-option -g status-left-attr bold
 set-option -g window-status-current-attr bold
+set-option -g status-left-style 'fg=white,bold'
+set-option -g status-right-style 'fg=white,bold'
 set-option -g status-left-length 30
 set-option -g status-right-length 60
-set-option -g status-justify centre
 
-# Simple status.
-set-option -g status-right '#[fg=white,bold]%a, %b %d, %I:%M %p'
-# For linux:
-# set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
-# For macOS:
-# set-option -g status-right '#[fg=colour228]◢ #(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep "[^B]SSID" | awk "{print \$2}") #[fg=colour246]| #[fg=colour214]♪ #(osascript -e "output volume of (get volume settings)") #[fg=colour246]| #[fg=colour219]♥ #(pmset -g batt | tail -n 1 | cut -d ";" -f 1 | awk "{print \$3}") #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
-
-# We want the bottom left status to read `$tmux_session_name @ $(hostname)`
-# where the hostname background color is a hash of the hostname. tmux has a way
-# to style text like this: `#[fg=white, bg=black]`. It also has a way to run
-# shell commands like this: `#(echo hi)`. However, we cannot embed the shell
-# commands in the styling. For example, we can't do this: `#[fg=#(echo
-# white)]`.
+# We want the bottom right status to include `$(hostname)` where the hostname
+# background color is a hash of the hostname. tmux has a way to style text like
+# this: `#[fg=white, bg=black]`. It also has a way to run shell commands like
+# this: `#(echo hi)`. However, we cannot embed the shell commands in the
+# styling. For example, we can't do this: `#[fg=#(echo white)]`.
 #
 # To get around this, we use the `run-shell` command to run a shell command
 # that calls `tmux set-option`. One hiccup is that tmux will process the string
@@ -45,8 +37,13 @@ set-option -g status-right '#[fg=white,bold]%a, %b %d, %I:%M %p'
 #
 # We also have to make sure to run the right shell command based on Linux or
 # MacOS. Weirdly, `if-shell` doesn't work for this.
-run-shell 'if test "$(uname)" = Linux; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5sum | cut -c 1-6)]$(hostname -s)"; fi'
-run-shell 'if test "$(uname)" = Darwin; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5 | cut -c 1-6)]$(hostname -s)"; fi'
+run-shell 'if test "$(uname)" = Linux; then tmux set-option -g status-right "#""[bg=""#""$(hostname -s | md5sum | cut -c 1-6)]$(hostname -s)#[default] %a, %b %d, %I:%M %p"; fi'
+run-shell 'if test "$(uname)" = Darwin; then tmux set-option -g status-right "#""[bg=""#""$(hostname -s | md5 | cut -c 1-6)]$(hostname -s)#[default] %a, %b %d, %I:%M %p"; fi'
+
+# For linux:
+# set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
+# For macOS:
+# set-option -g status-right '#[fg=colour228]◢ #(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep "[^B]SSID" | awk "{print \$2}") #[fg=colour246]| #[fg=colour214]♪ #(osascript -e "output volume of (get volume settings)") #[fg=colour246]| #[fg=colour219]♥ #(pmset -g batt | tail -n 1 | cut -d ";" -f 1 | awk "{print \$3}") #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
 
 # Display panes forever.
 set-option -g display-panes-time 1000000
@@ -89,23 +86,23 @@ bind c new-window -c "#{pane_current_path}"
 # pink:   colour219
 
 # Status line (the left and right part of the bar at the bottom of the screen).
-set-option -g status-bg colour233
+set-option -g status-bg default
 set-option -g status-fg white
-set-option -g status-left-bg colour233
+set-option -g status-left-bg default
 set-option -g status-left-fg white
-set-option -g status-right-bg colour233
+set-option -g status-right-bg default
 set-option -g status-right-fg white
 
 # Windows (the window information at the bottom of the screen)
-set-window-option -g window-status-current-bg colour233
+set-window-option -g window-status-current-bg default
 set-window-option -g window-status-current-fg colour39
-set-window-option -g window-status-last-bg colour233
+set-window-option -g window-status-last-bg default
 set-window-option -g window-status-last-fg colour246
-set-window-option -g window-status-bg colour233
+set-window-option -g window-status-bg default
 set-window-option -g window-status-fg colour246
 
 # Command mode (when you hit `C-b :` to enter a command)
-set-option -g message-bg colour233
+set-option -g message-bg default
 set-option -g message-fg white
 
 # Copy and choice modes (e.g. `C-b C-[` to scroll back and `C-b s` for sessions)
