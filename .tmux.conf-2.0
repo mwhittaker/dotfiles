@@ -45,8 +45,8 @@ set-option -g status-right '#[fg=white,bold]%a, %b %d, %I:%M %p'
 #
 # We also have to make sure to run the right shell command based on Linux or
 # MacOS. Weirdly, `if-shell` doesn't work for this.
-run-shell 'if [[ $(uname) = Linux ]]; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5sum | cut -c 1-6)]$(hostname -s)"; fi'
-run-shell 'if [[ $(uname) = Darwin ]]; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5 | cut -c 1-6)]$(hostname -s)"; fi'
+run-shell 'if test "$(uname)" = Linux; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5sum | cut -c 1-6)]$(hostname -s)"; fi'
+run-shell 'if test "$(uname)" = Darwin; then tmux set-option -g status-left "#""S @ ""#""[fg=white, bg=""#""$(hostname -s | md5 | cut -c 1-6)]$(hostname -s)"; fi'
 
 # Display panes forever.
 set-option -g display-panes-time 1000000
