@@ -65,6 +65,11 @@ bind-key C-j resize-pane -D
 bind-key C-k resize-pane -U
 bind-key C-l resize-pane -R
 
+# Split windows and panes from current path.
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
 ################################################################################
 # Colors and Styling
 ################################################################################
