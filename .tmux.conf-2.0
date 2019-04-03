@@ -19,11 +19,16 @@ bind-key Right select-pane -R
 # Status line.
 set-option -g status-left-attr bold
 set-option -g window-status-current-attr bold
+set-option -g status-left-length 30
 set-option -g status-right-length 60
+set-option -g status-justify centre
+
+# Simple status.
+set-option -g status-right '#[fg=white,bold]%a, %b %d, %I:%M %p'
 # For linux:
 # set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
 # For macOS:
-set-option -g status-right '#[fg=colour228]◢ #(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep "[^B]SSID" | awk "{print \$2}") #[fg=colour246]| #[fg=colour214]♪ #(osascript -e "output volume of (get volume settings)") #[fg=colour246]| #[fg=colour219]♥ #(pmset -g batt | tail -n 1 | cut -d ";" -f 1 | awk "{print \$3}") #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
+# set-option -g status-right '#[fg=colour228]◢ #(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep "[^B]SSID" | awk "{print \$2}") #[fg=colour246]| #[fg=colour214]♪ #(osascript -e "output volume of (get volume settings)") #[fg=colour246]| #[fg=colour219]♥ #(pmset -g batt | tail -n 1 | cut -d ";" -f 1 | awk "{print \$3}") #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
 
 # Display panes forever.
 set-option -g display-panes-time 1000000
