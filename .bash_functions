@@ -187,7 +187,7 @@ trun() {
             local new_session_created=true
         fi
     else
-        if [[ -n "$TMUX" ]]; then
+        if [[ -z "${TMUX:-}" ]]; then
             session_id="$(tmux display-message -p '#S')"
             local new_session_created=false
         else
@@ -219,7 +219,7 @@ trun() {
     done
 
     # Attach to the session
-    if [[ -z "$TMUX" ]] && ! "$detach"; then
+    if [[ -z "${TMUX:-}" ]] && ! "$detach"; then
         tmux attach -t "$session_id"
     fi
 }
