@@ -120,6 +120,110 @@ tpane() {
     tmux display -pt "${TMUX_PANE:?}" '#{pane_index}'
 }
 
+# trun is a tool to run a set of bash commands in separate panes within a
+# window of a tmux session. Here are some examples:
+#
+#   $ trun 'echo hi' 'echo sup'
+#
+# If we're not within tmux, this creates a new session with a single window.
+# This window has two panes: one with 'echo hi' and one with 'echo sup'. If
+# we're within a tmux session, it creates a new window with 'echo hi' and 'echo
+# sup'.
+#
+#   $ trun -s foo 'echo hi' 'echo sup'
+#
+# Run 'echo hi' and 'echo sup' within a session named `foo`. If a session named
+# `foo`, does not already exist, one is created.
+#
+#   $ trun -s -d foo 'echo hi' 'echo sup'
+#
+# Run 'echo hi' and 'echo sup' within a session named `foo`, but do not attach
+# to it. This allows us to create multiple windows within a session liek this:
+#
+#   $ trun -s foo -d 'echo this is in window 1' 'echo this too'
+#   $ trun -s foo -d 'echo this is in window 2' 'echo this too'
+#   $ trun -s foo 'echo this is in window 3' 'echo this line will attach'
+trun() {
+    local OPTIND
+    local session_id=""
+    local detach=false
+    while getopts "hs:d" opt; do
+        case ${opt} in
+            h )
+                echo "trun [-s session_name] [-d] cmd [cmd]..."
+                return 0
+                ;;
+            s )
+                session_id="$OPTARG"
+                ;;
+            d )
+                detach=true
+                ;;
+            \? )
+                echo "trun [-s session_name] [-d] cmd [cmd]..."
+                return 1
+                ;;
+            : )
+                echo "$OPTARG reqiures an argument."
+                usage "$0"
+                return 1
+                ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    # No commands were given.
+    if [[ $# -eq 0 ]]; then
+        echo "trun [-s session_name] [-d] cmd [cmd]..."
+        return 1
+    fi
+
+    # Create the session if necessary.
+    if [[ -n $session_id ]]; then
+        if tmux has-session -t "$session_id"; then
+            local new_session_created=false
+        else
+            TMUX="" tmux new-session -d -s "$session_id"
+            local new_session_created=true
+        fi
+    else
+        if [[ -n "$TMUX" ]]; then
+            session_id="$(tmux display-message -p '#S')"
+            local new_session_created=false
+        else
+            tmux new-session -d
+            session_id="$(tmux display-message -p '#S')"
+            local new_session_created=true
+        fi
+    fi
+
+    # Create a new window, but only if we're already within the session.
+    if $new_session_created; then
+        window_id="${session_id}:0"
+    else
+        window_id="$(tmux new-window \
+                       -t "$session_id:" \
+                       -P \
+                       -F '#{session_name}:#{window_index}')"
+    fi
+
+    # Create a new pane for every command, and arrange nicely.
+    for ((i = 0; i < "$(($# - 1))"; ++i)); do
+        tmux split-window -t "${window_id}.0" -h -p 1
+    done
+    tmux select-layout -t "$window_id" even-vertical
+
+    # Run the commands.
+    for ((i = 1; i <= "$#"; ++i)); do
+        tmux send-keys -t "${window_id}.$((i - 1))" "${!i}" C-m
+    done
+
+    # Attach to the session
+    if [[ -z "$TMUX" ]] && ! "$detach"; then
+        tmux attach -t "$session_id"
+    fi
+}
+
 # Let's say you open up a fresh terminal. Bash stores a history of the commands
 # you type into this terminal in two places.
 #
