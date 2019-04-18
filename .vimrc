@@ -180,14 +180,6 @@ augroup cpp_settings_group
     autocmd FileType cpp ClangFormatAutoEnable
 augroup END
 
-" coq
-let g:coquille_auto_move = 'true'
-nnoremap <silent> <leader>cl :CoqLaunch<cr>
-nnoremap <silent> <leader>cc :CoqToCursor<cr>
-nnoremap <silent> <leader>cn :CoqNext<cr>
-nnoremap <silent> <leader>cu :CoqUndo<cr>
-nnoremap <silent> <leader>ck :CoqKill<cr>
-
 " css
 augroup css_settings_group
     autocmd!
