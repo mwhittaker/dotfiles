@@ -74,6 +74,10 @@ install_latexmkrc() {
 }
 
 main() {
+    if ! [[ "$(basename $PWD)" = "dotfiles" ]]; then
+        echo "You must run install.sh script from within dotfiles/."
+        return 1
+    fi
     install_bash_aliases
     install_bash_functions
     install_bash_path
