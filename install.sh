@@ -53,13 +53,10 @@ install_vimrc() {
     fi
     link .vimrc ~/.vimrc
     vim +PluginInstall +qa
+}
 
-    echo 'In ~/.vim/bundle/coquille/autoload/coquille.vim, change'
-    echo '  hi CheckedByCoq ctermbg=17 guibg=LightGreen'
-    echo '  hi SentToCoq ctermbg=60 guibg=LimeGreen'
-    echo 'to'
-    echo '  hi link CheckedByCoq ColorColumn'
-    echo '  hi link SentToCoq Visual'
+install_sshrc() {
+    link sshrc ~/.ssh/rc
 }
 
 install_xmonad_hs() {
@@ -85,6 +82,7 @@ main() {
     install_gitconfig
     install_tmux_conf
     install_vimrc
+    install_sshrc
     install_xmonad_hs
     install_latexmkrc
 }
