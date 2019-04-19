@@ -67,11 +67,6 @@ bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
-# Fix SSH issues. See [1] for more information.
-#
-# [1]: https://werat.github.io/2017/02/04/tmux-ssh-agent-forwarding.html
-set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
-
 ################################################################################
 # Colors and Styling
 ################################################################################

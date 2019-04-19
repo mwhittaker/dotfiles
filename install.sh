@@ -51,9 +51,6 @@ install_vimrc() {
     vim +PluginInstall +qa
 }
 
-install_sshrc() {
-    link sshrc ~/.ssh/rc
-}
 
 install_xmonad_hs() {
     if [[ $(uname) = Linux ]]; then
@@ -78,7 +75,6 @@ main() {
     install_gitconfig
     install_tmux_conf
     install_vimrc
-    install_sshrc
     install_xmonad_hs
     install_latexmkrc
 }
