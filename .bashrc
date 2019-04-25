@@ -13,9 +13,11 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=""
-HISTFILESIZE=""
-HISTTIMEFORMAT="%m/%d/%y %T "
+# See https://stackoverflow.com/a/19533853/3187068 for details.
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTTIMEFORMAT="%m/%d/%y %T "
+export HISTFILE=~/.bash_eternal_history
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
