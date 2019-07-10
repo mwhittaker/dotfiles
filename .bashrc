@@ -2,6 +2,27 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# The code below checks whether the shell that is running this .bashrc is
+# running interactively. If it is, then the .bashrc returns and the rest of
+# this file is not executed. See [1] for an explanation of this. Normally, this
+# is not a problem. When you open up a terminal or ssh in to another machine,
+# the shell you interact with is, well, interactive. However, if you try to run
+# a command via ssh, like this:
+#
+#     ssh <address> <command>
+#
+# then the command is _not_ run in an interactive shell. Thus, the shell in
+# which the command is run does not execute this .bashrc. It returns on the
+# next bit of code. This is fine for most things. For example, we don't need to
+# set PS1 if we're not running interatively. However, we still would like our
+# PATH to be updated when running shell commands. So, we source ~/.bash_path
+# here instead of down below.
+#
+# [1]: https://unix.stackexchange.com/a/257613
+if [ -f ~/.bash_path ]; then
+    . ~/.bash_path
+fi
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -161,11 +182,6 @@ fi
 # Environment variables
 if [ -f ~/.bash_variables ]; then
     . ~/.bash_variables
-fi
-
-# Path
-if [ -f ~/.bash_path ]; then
-    . ~/.bash_path
 fi
 
 # Functions
