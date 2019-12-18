@@ -1,0 +1,114 @@
+################################################################################
+# Behavior
+################################################################################
+# Enable vi mode when in copy and choice modes.
+set-window-option -g mode-keys vi
+
+# Support 256 colors.
+set-option -g default-terminal "screen-256color"
+
+# Enable mouse support.
+set-option -g mouse on
+
+# Only allow arrow keys to be pressed once.
+bind-key Up    select-pane -U
+bind-key Down  select-pane -D
+bind-key Left  select-pane -L
+bind-key Right select-pane -R
+
+# Status line.
+set-option -g window-status-current-style bold
+set-option -g status-left-style 'fg=white,bold'
+set-option -g status-right-style 'fg=white,bold'
+set-option -g status-left-length 30
+set-option -g status-right-length 60
+
+# We want the bottom right status to include `$(hostname)` where the hostname
+# background color is a hash of the hostname. tmux has a way to style text like
+# this: `#[fg=white, bg=black]`. It also has a way to run shell commands like
+# this: `#(echo hi)`. However, we cannot embed the shell commands in the
+# styling. For example, we can't do this: `#[fg=#(echo white)]`.
+#
+# To get around this, we use the `run-shell` command to run a shell command
+# that calls `tmux set-option`. One hiccup is that tmux will process the string
+# we pass to run-shell and expand all #[] and #() patterns. We don't want this.
+# To avoid that, we surround each # in the shell command with its own set of
+# quotes. This stops tmux from expanding things.
+#
+# We also have to make sure to run the right shell command based on Linux or
+# MacOS. Weirdly, `if-shell` doesn't work for this.
+run-shell 'if test "$(uname)" = Linux; then tmux set-option -g status-right "#""[bg=""#""$(hostname -s | md5sum | cut -c 1-6)]$(hostname -s)#[default] %a, %b %d, %I:%M %p"; fi'
+run-shell 'if test "$(uname)" = Darwin; then tmux set-option -g status-right "#""[bg=""#""$(hostname -s | md5 | cut -c 1-6)]$(hostname -s)#[default] %a, %b %d, %I:%M %p"; fi'
+
+# For linux:
+# set-option -g status-right '#[fg=colour228]◢ #(nm-tool | grep --only-matching "*[^: ]\\+" | sed "s/^*//") #[fg=colour246]| #[fg=colour214]♪ #(exec amixer --card 1 get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*") #[fg=colour246]| #[fg=colour219]♥#(acpi | cut -d "," -f 2) #[fg=colour246]| #[fg=white,bold]%I:%M %p'
+# For macOS:
+# set-option -g status-right '#[fg=colour228]◢ #(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep "[^B]SSID" | awk "{print \$2}") #[fg=colour246]| #[fg=colour214]♪ #(osascript -e "output volume of (get volume settings)") #[fg=colour246]| #[fg=colour219]♥ #(pmset -g batt | tail -n 1 | cut -d ";" -f 1 | awk "{print \$3}") #[fg=colour246]| #[fg=white,bold]%a, %b %d, %I:%M %p'
+
+# Display panes forever.
+set-option -g display-panes-time 1000000
+
+# 12 hour clock.
+set-option -g clock-mode-style 12
+
+# Make commands like `open` work for macos. See https://goo.gl/mV6XZv for more
+# information.
+# if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux.conf-macos'
+
+# Resize panes with hjkl instead of arrow keys. On macos, C-up for example, is
+# gobbled before tmux can get to it.
+bind-key C-h resize-pane -L
+bind-key C-j resize-pane -D
+bind-key C-k resize-pane -U
+bind-key C-l resize-pane -R
+
+# Split windows and panes from current path.
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
+################################################################################
+# Colors and Styling
+################################################################################
+# - https://github.com/mwhittaker/tmux_color_picker
+# - http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+#
+# light gray: colour246
+# dark gray:  colour237
+# black:      colour233
+#
+# light blue: colour39
+# blue:       colour12
+# dark blue:  colour4
+#
+# yellow: colour228
+# orange: colour214
+# pink:   colour219
+
+# Status line (the left and right part of the bar at the bottom of the screen).
+set-option -g status-bg default
+set-option -g status-fg white
+set-option -g status-left-style 'bg=default fg=white'
+set-option -g status-right-style 'bg=default fg=white'
+
+# Windows (the window information at the bottom of the screen)
+set-window-option -g window-status-current-style 'bg=default fg=colour39'
+set-window-option -g window-status-last-style 'bg=default fg=colour246'
+set-window-option -g window-status-style 'bg=default fg=colour246'
+
+# Command mode (when you hit `C-b :` to enter a command)
+set-option -g message-style 'bg=default fg=white'
+
+# Copy and choice modes (e.g. `C-b C-[` to scroll back and `C-b s` for sessions)
+set-window-option -g mode-style 'bg=colour12 fg=white'
+
+# Display panes (`C-b q`)
+set-option -g display-panes-active-colour colour39
+set-option -g display-panes-colour colour246
+
+# Pane borders.
+set-option -g pane-active-border-style 'fg=colour39'
+set-option -g pane-border-style 'fg=colour246'
+
+# Clock (`C-b t`)
+set-window-option -g clock-mode-colour colour39
