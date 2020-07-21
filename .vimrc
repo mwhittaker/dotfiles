@@ -127,6 +127,10 @@ cnoremap <c-p> <up>
 cnoremap <c-n> <down>
 cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
+" Remove octal incrementing and decrementing. I don't want C-x to increment 07
+" to 10. I want it to increment to 08.
+set nrformats-=octal
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Advanced Vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
