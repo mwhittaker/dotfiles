@@ -28,7 +28,9 @@ install_gitconfig() {
 
 install_tmux_conf() {
     local tmux_version=$(tmux -V | awk '{print $2}')
-    if test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then
+    if echo "$tmux_version" | grep '3.' > /dev/null; then
+        link .tmux.conf-3.0 ~/.tmux.conf
+    elif test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then
         link .tmux.conf-1.8 ~/.tmux.conf
     elif test $(echo "$tmux_version < 2.0" | bc) -eq 1; then
         cat .tmux.conf-1.8 > .tmux.conf
