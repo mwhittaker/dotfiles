@@ -46,13 +46,9 @@ install_tmux_conf() {
 }
 
 install_vimrc() {
-    if test ! -d ~/.vim/bundle/Vundle.vim; then
-        git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    fi
     link .vimrc ~/.vimrc
-    vim +PluginInstall +qa
+    vim +PlugInstall +qa
 }
-
 
 install_xmonad_hs() {
     if [[ $(uname) = Linux ]]; then

@@ -4,75 +4,59 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-
-" Core plugins.
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'ervandew/supertab'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'godlygeek/tabular'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kshenoy/vim-signature'
-Plugin 'majutsushi/tagbar'
-Plugin 'mkitt/tabline.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'sjl/gundo.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-surround'
-
-" Language specific plugins.
-" Plugin 'chrisbra/csv.vim'                 " csv
-" Plugin 'derekwyatt/vim-scala'             " scala
-" Plugin 'mwhittaker/dedalus-vim'           " dedalus
-" Plugin 'octol/vim-cpp-enhanced-highlight' " c++
-" Plugin 'rhysd/vim-clang-format'           " c++
-" Plugin 'puppetlabs/puppet-syntax-vim'     " puppet
-" Plugin 'florentc/vim-tla'                 " tla
-" Plugin 'Quramy/tsuquyomi'                 " typescript
-" Plugin 'Shougo/vimproc.vim'               " typescript
-" Plugin 'leafgarland/typescript-vim'       " typescript
-" Plugin 'tpope/vim-markdown'               " markdown
-" 'vim-textobj-user' has to be installed before 'vim-textobj-latex'.
-" Plugin 'kana/vim-textobj-user'            " latex
-" Plugin 'rbonvall/vim-textobj-latex'       " latex
-
-if version >= 703
-    Plugin 'Lokaltog/vim-easymotion'
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#begin()
+
+" Core plugins.
+Plug 'Chiel92/vim-autoformat'
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'ervandew/supertab'
+Plug 'flazz/vim-colorschemes'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'majutsushi/tagbar'
+Plug 'mkitt/tabline.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'sjl/gundo.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-surround'
+
+" Language specific plugins.
+" Plug 'chrisbra/csv.vim'                 " csv
+" Plug 'derekwyatt/vim-scala'             " scala
+" Plug 'mwhittaker/dedalus-vim'           " dedalus
+" Plug 'octol/vim-cpp-enhanced-highlight' " c++
+" Plug 'rhysd/vim-clang-format'           " c++
+" Plug 'puppetlabs/puppet-syntax-vim'     " puppet
+" Plug 'florentc/vim-tla'                 " tla
+" Plug 'Quramy/tsuquyomi'                 " typescript
+" Plug 'Shougo/vimproc.vim'               " typescript
+" Plug 'leafgarland/typescript-vim'       " typescript
+" Plug 'tpope/vim-markdown'               " markdown
+" 'vim-textobj-user' has to be installed before 'vim-textobj-latex'.
+" Plug 'kana/vim-textobj-user'            " latex
+" Plug 'rbonvall/vim-textobj-latex'       " latex
+
+if version >= 703
+    Plug 'Lokaltog/vim-easymotion'
+endif
+
+call plug#end()
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
