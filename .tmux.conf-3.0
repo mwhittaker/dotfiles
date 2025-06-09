@@ -5,7 +5,8 @@
 set-window-option -g mode-keys vi
 
 # Support 256 colors.
-set-option -g default-terminal "screen-256color"
+set -g default-terminal "screen-256color"
+set -ga terminal-overrides ",*256color:Tc"
 
 # Enable mouse support.
 set-option -g mouse on
@@ -67,6 +68,13 @@ bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
+# Have a bigger history.
+set-option -g history-limit 50000
+
+# Use vim style commands top select and copy text in copy mode.
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection
+
 ################################################################################
 # Colors and Styling
 ################################################################################
@@ -86,18 +94,17 @@ bind c new-window -c "#{pane_current_path}"
 # pink:   colour219
 
 # Status line (the left and right part of the bar at the bottom of the screen).
-set-option -g status-bg default
-set-option -g status-fg white
-set-option -g status-left-style 'bg=default fg=white'
-set-option -g status-right-style 'bg=default fg=white'
+set-option -g status-style 'bg=terminal fg=white'
+set-option -g status-left-style 'bg=terminal fg=white'
+set-option -g status-right-style 'bg=terminal fg=white'
 
 # Windows (the window information at the bottom of the screen)
-set-window-option -g window-status-current-style 'bg=default fg=colour39'
-set-window-option -g window-status-last-style 'bg=default fg=colour246'
-set-window-option -g window-status-style 'bg=default fg=colour246'
+set-window-option -g window-status-current-style 'bg=terminal fg=colour39'
+set-window-option -g window-status-last-style 'bg=terminal fg=colour246'
+set-window-option -g window-status-style 'bg=terminal fg=colour246'
 
 # Command mode (when you hit `C-b :` to enter a command)
-set-option -g message-style 'bg=default fg=white'
+set-option -g message-style 'bg=terminal fg=white'
 
 # Copy and choice modes (e.g. `C-b C-[` to scroll back and `C-b s` for sessions)
 set-window-option -g mode-style 'bg=colour12 fg=white'
