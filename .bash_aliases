@@ -22,12 +22,5 @@ alias tmux="tmux -2"
 alias t="tmux"
 alias tnew="tmux new -s"
 
-# tla. See [1] for more information.
-#
-# [1]: https://medium.com/@bellmar/introduction-to-tla-model-checking-in-the-command-line-c6871700a6a2
-alias sany='java -cp "$TLA_PATH" tla2sany.SANY'
-alias tlc='java -cp "$TLA_PATH" tlc2.TLC'
-alias tla2tex='java -cp "$TLA_PATH" tla2tex.TLA'
-
 # misc
 alias chrome="google-chrome"

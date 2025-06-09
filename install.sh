@@ -70,6 +70,14 @@ main() {
         echo "You must run install.sh script from within dotfiles/."
         return 1
     fi
+
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install bat fd-find fzf ripgrep
+    mkdir -p ~/.local/bin
+    ln -s $(which batcat) ~/.local/bin/bat
+    ln -s $(which fdfind) ~/.local/bin/fd
+
     install_bash_aliases
     install_bash_functions
     install_bash_path
