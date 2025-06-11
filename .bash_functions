@@ -132,3 +132,7 @@ read_history() {
     # Load our in-memory history from ~/.bash_history.
     history -r
 }
+
+vgrep() {
+    vim +"Rg $1"
+}
