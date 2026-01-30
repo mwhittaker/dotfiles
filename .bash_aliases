@@ -24,3 +24,4 @@ alias tnew="tmux new -s"
 
 # misc
 alias chrome="google-chrome"
+alias tpane='tmux display -pt "${TMUX_PANE:?}" "#{pane_index}"'
