@@ -14,6 +14,7 @@ endif
 call plug#begin()
 
 " Core plugins.
+Plug 'jszakmeister/vim-togglecursor'
 Plug 'Chiel92/vim-autoformat'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
@@ -28,7 +29,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mkitt/tabline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-abolish'
@@ -47,7 +48,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'derekwyatt/vim-scala'             " scala
 " Plug 'mwhittaker/dedalus-vim'           " dedalus
 " Plug 'octol/vim-cpp-enhanced-highlight' " c++
-" Plug 'rhysd/vim-clang-format'           " c++
+Plug 'rhysd/vim-clang-format'           " c++
 " Plug 'puppetlabs/puppet-syntax-vim'     " puppet
 " Plug 'florentc/vim-tla'                 " tla
 " Plug 'Quramy/tsuquyomi'                 " typescript
@@ -193,6 +194,12 @@ augroup html_settings_group
     autocmd!
     autocmd FileType html setlocal shiftwidth=2 tabstop=2
     autocmd FileType html setlocal cursorcolumn
+augroup END
+
+" python
+augroup python_settings_group
+    autocmd!
+    autocmd FileType python setlocal shiftwidth=2 tabstop=2
 augroup END
 
 " ipython
@@ -449,7 +456,7 @@ let g:multi_cursor_quit_key='<C-c>'
 "
 "     pip install "python-lsp-server[all]"
 "     pip install --upgrade jedi
-"     pip uninstall pycodestyle.
+"     pip uninstall pycodestyle
 
 let g:lsp_async_completion = 1
 let g:lsp_diagnostics_echo_cursor = 1
