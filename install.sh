@@ -27,18 +27,15 @@ install_gitconfig() {
 }
 
 install_tmux_conf() {
+    # tmux -V prints things like "tmux 3.0a" or "tmux next-3.4"; grab the
+    # leading digits of the version number.
     local tmux_version=$(tmux -V | awk '{print $2}')
-    if echo "$tmux_version" | grep '3.' > /dev/null; then
-        link .tmux.conf-3.0 ~/.tmux.conf
-    elif test $(echo "$tmux_version <= 1.8" | bc) -eq 1; then
-        link .tmux.conf-1.8 ~/.tmux.conf
-    elif test $(echo "$tmux_version < 2.0" | bc) -eq 1; then
-        cat .tmux.conf-1.8 > .tmux.conf
-        cat .tmux.conf-1.9 >> .tmux.conf
-        link .tmux.conf ~/.tmux.conf
-    else
-        link .tmux.conf-2.0 ~/.tmux.conf
+    local tmux_major=$(echo "$tmux_version" | grep -o '[0-9]\+' | head -n 1)
+    if [[ -z "$tmux_major" ]] || (( tmux_major < 3 )); then
+        echo "tmux 3 or later is required, but found version '$tmux_version'."
+        return 1
     fi
+    link .tmux.conf ~/.tmux.conf
 
     if [[ $(uname) = "Darwin" ]]; then
         link .tmux.conf-macos ~/.tmux.conf-macos
@@ -55,10 +52,6 @@ install_xmonad_hs() {
         mkdir -p ~/.xmonad
         link xmonad.hs ~/.xmonad/xmonad.hs
     fi
-}
-
-install_latexmkrc() {
-    link .latexmkrc ~/.latexmkrc
 }
 
 main() {
@@ -81,8 +74,7 @@ main() {
     install_gitconfig
     install_tmux_conf
     install_vimrc
-    install_xmonad_hs
-    install_latexmkrc
+    # install_xmonad_hs
 }
 
 main
